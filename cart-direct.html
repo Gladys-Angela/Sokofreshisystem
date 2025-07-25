@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Cart</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <style>
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-right: 15px;
+    }
+    .item-details {
+      flex: 1;
+    }
+    .item-details strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    .item-details .quantity {
+      display: block;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .item-details .price {
+      font-weight: 600;
+      color: #00b761;
+    }
+    .remove-btn {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      background-color: #ff5252;
+    }
+    .cart-total {
+      text-align: right;
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+    .quantity-btn {
+      background: #eee;
+      border: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .quantity-display {
+      margin: 0 10px;
+      font-weight: 500;
+    }
+    .empty-cart {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+    .checkout-btn {
+      display: inline-block;
+      background-color: #00b761;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+    .checkout-btn:hover {
+      background-color: #009d53;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <div class="right-nav">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span>0</span>
+      </a>
+      <a href="cart-direct.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span>0</span>
+      </a>
+    </div>
+  </nav>
+
+  <section id="popular-product">
+    <div class="product-heading">
+      <h3>Shopping Cart</h3>
+    </div>
+    <div class="product-container">
+      <div id="cart-items"></div>
+      <div id="cart-total"></div>
+      <div id="checkout-container" style="text-align: center;">
+        <a href="#" id="checkout-btn" class="checkout-btn">
+          <i class="fa fa-credit-card"></i>
+          Proceed to Checkout
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="#">Soko freshi</a>
+      </div>
+      <div class="footer-links">
+        <strong>Quick Links</strong>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="js/login-state.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalContainer = document.getElementById('cart-total');
+      const checkoutContainer = document.getElementById('checkout-container');
+      
+      // Get cart from localStorage
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+        cartTotalContainer.innerHTML = '';
+        checkoutContainer.style.display = 'none';
+      } else {
+        let total = 0;
+        let html = '';
+        
+        cart.forEach(item => {
+          const itemTotal = parseFloat(item.price) * item.count;
+          total += itemTotal;
+          
+          html += `
+            <div class="cart-item">
+              <img src="${item.image}" alt="${item.name}">
+              <div class="item-details">
+                <strong>${item.name}</strong>
+                <div class="quantity-controls">
+                  <button class="quantity-btn decrease-btn" data-id="${item.id}">-</button>
+                  <span class="quantity-display">${item.count}</span>
+                  <button class="quantity-btn increase-btn" data-id="${item.id}">+</button>
+                </div>
+                <span class="price">Ksh${itemTotal}</span>
+              </div>
+              <button class="remove-btn" data-id="${item.id}">Remove</button>
+            </div>
+          `;
+        });
+        
+        cartItemsContainer.innerHTML = html;
+        cartTotalContainer.innerHTML = `<strong>Total: Ksh${total.toFixed(2)}</strong>`;
+        
+        // Handle quantity changes and item removal
+        cartItemsContainer.addEventListener('click', function(e) {
+          if (e.target.classList.contains('remove-btn')) {
+            const itemId = e.target.dataset.id;
+            const newCart = cart.filter(item => item.id !== itemId);
+            localStorage.setItem('cart', JSON.stringify(newCart));
+            location.reload();
+          } else if (e.target.classList.contains('increase-btn')) {
+            const itemId = e.target.dataset.id;
+            const itemIndex = cart.findIndex(item => item.id === itemId);
+            if (itemIndex !== -1) {
+              cart[itemIndex].count += 1;
+              localStorage.setItem('cart', JSON.stringify(cart));
+              location.reload();
+            }
+          } else if (e.target.classList.contains('decrease-btn')) {
+            const itemId = e.target.dataset.id;
+            const itemIndex = cart.findIndex(item => item.id === itemId);
+            if (itemIndex !== -1 && cart[itemIndex].count > 1) {
+              cart[itemIndex].count -= 1;
+              localStorage.setItem('cart', JSON.stringify(cart));
+              location.reload();
+            }
+          }
+        });
+      }
+      
+      // Update cart count
+      const cartCount = cart.reduce((total, item) => total + item.count, 0);
+      document.querySelectorAll('.cart span').forEach(span => {
+        span.textContent = cartCount;
+      });
+      
+      // Handle checkout button
+      document.getElementById('checkout-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Check if user is logged in (using a simple check)
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        
+        if (isLoggedIn) {
+          // Proceed to checkout
+          window.location.href = 'checkout.html';
+        } else {
+          // Redirect to login page
+          window.location.href = 'login.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

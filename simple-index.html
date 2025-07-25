@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    nav { background: #f8f8f8; padding: 10px; display: flex; justify-content: space-between; }
+    .logo { font-weight: bold; font-size: 24px; }
+    .logo span { color: green; }
+    .menu { display: flex; list-style: none; }
+    .menu li { margin-right: 20px; }
+    .menu a { text-decoration: none; color: #333; }
+    .cart-link { text-decoration: none; color: #333; }
+    .products { display: flex; flex-wrap: wrap; padding: 20px; }
+    .product { border: 1px solid #ddd; margin: 10px; padding: 10px; width: 200px; }
+    .product img { width: 100%; height: 150px; object-fit: cover; }
+    .product button { background: green; color: white; border: none; padding: 8px; cursor: pointer; width: 100%; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Soko freshi</div>
+    <ul class="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a href="simple-cart.html" class="cart-link">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+
+  <h1 style="text-align: center;">Featured Products</h1>
+  
+  <div class="products">
+    <div class="product">
+      <img src="images/apple.jpg" alt="Apple">
+      <h3>Apple</h3>
+      <p>1 KG</p>
+      <p>Ksh150</p>
+      <button class="add-to-cart" data-id="apple1" data-name="Apple" data-price="150" data-image="images/apple.jpg">Add to Cart</button>
+    </div>
+    
+    <div class="product">
+      <img src="images/orange.jpg" alt="Orange">
+      <h3>Orange</h3>
+      <p>1 KG</p>
+      <p>Ksh180</p>
+      <button class="add-to-cart" data-id="orange1" data-name="Orange" data-price="180" data-image="images/orange.jpg">Add to Cart</button>
+    </div>
+    
+    <div class="product">
+      <img src="images/tomato.png" alt="Tomato">
+      <h3>Tomato</h3>
+      <p>1 KG</p>
+      <p>Ksh120</p>
+      <button class="add-to-cart" data-id="tomato1" data-name="Tomato" data-price="120" data-image="images/tomato.png">Add to Cart</button>
+    </div>
+  </div>
+
+  <script>
+    // Get cart from localStorage or initialize empty array
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Update cart count
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.reduce((total, item) => total + item.count, 0);
+    }
+    
+    // Add event listeners to all add-to-cart buttons
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', function() {
+        const product = {
+          id: this.dataset.id,
+          name: this.dataset.name,
+          price: this.dataset.price,
+          image: this.dataset.image,
+          count: 1
+        };
+        
+        // Check if product already exists in cart
+        const existingProductIndex = cart.findIndex(item => item.id === product.id);
+        
+        if (existingProductIndex > -1) {
+          // Increment count if product exists
+          cart[existingProductIndex].count += 1;
+        } else {
+          // Add new product to cart
+          cart.push(product);
+        }
+        
+        // Save cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Show confirmation
+        alert(`${product.name} added to cart!`);
+      });
+    });
+    
+    // Update cart count on page load
+    updateCartCount();
+  </script>
+</body>
+</html>

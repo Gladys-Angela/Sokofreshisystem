@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Products</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/product-fix.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .filters-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #eaeaea;
+    }
+    
+    .filter-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .filter-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .filter-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background-color: white;
+      font-size: 0.95rem;
+      color: #444;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 15px top 50%;
+      background-size: 12px auto;
+    }
+    
+    .filter-group select:focus {
+      border-color: #00b761;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,183,97,0.15);
+    }
+    
+    .vendor-info {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #555;
+      font-weight: 500;
+    }
+    
+    .vendor-info i {
+      margin-right: 6px;
+      color: #00b761;
+    }
+    
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      width: 100%;
+    }
+    
+    .loading-spinner {
+      border: 4px solid rgba(0, 183, 97, 0.2);
+      border-radius: 50%;
+      border-top: 4px solid #00b761;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .no-products-container {
+      text-align: center;
+      padding: 40px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      width: 100%;
+    }
+    
+    .no-products-icon {
+      font-size: 3rem;
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+    
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px;
+    }
+    
+    .product-box {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+      width: 280px;
+      padding-bottom: 15px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .product-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .product-box img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .product-box strong {
+      display: block;
+      font-size: 1.2rem;
+      padding: 15px 15px 5px;
+      color: #333;
+    }
+    
+    .product-box .quantity {
+      display: block;
+      font-size: 0.9rem;
+      color: #666;
+      padding: 0 15px;
+    }
+    
+    .product-box .price {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #00b761;
+      padding: 5px 15px 10px;
+    }
+    
+    .product-box .cart-btn {
+      background-color: #00b761;
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin: 10px 15px 0;
+      display: block;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .product-box .cart-btn:hover {
+      background-color: #009d53;
+    }
+    
+    .product-box .like-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .product-box .like-btn i {
+      color: #ff5e5e;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html" class="active">Products</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <div class="right-nav" id="guest-nav">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart-direct.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+      <a href="login.html" class="login">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span>Login</span>
+      </a>
+      <a href="register.html" class="register">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Register</span>
+      </a>
+    </div>
+    <div class="right-nav" id="user-nav" style="display: none;">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count-user">0</span>
+      </a>
+      <a href="cart-direct.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count-user">0</span>
+      </a>
+      <a href="my_orders.html" class="my-orders">
+        <i class="fas fa-receipt"></i>
+        <span>My Orders</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+
+  <section id="popular-product">
+    <div class="product-heading">
+      <h3>All Products</h3>
+      <span>Fresh from our trusted vendors</span>
+    </div>
+    
+    <!-- Filters Section -->
+    <div class="filters-container">
+      <div class="filter-group">
+        <label for="category-filter">CATEGORY</label>
+        <select id="category-filter">
+          <option value="">All Categories</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Vegetables">Vegetables</option>
+          <option value="Fish & Meat">Fish & Meat</option>
+          <option value="Spices">Spices</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label for="vendor-filter">VENDOR</label>
+        <select id="vendor-filter">
+          <option value="">All Vendors</option>
+          <!-- Vendors will be loaded dynamically -->
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label for="sort-filter">SORT BY</label>
+        <select id="sort-filter">
+          <option value="default">Default</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="product-container" id="product-container">
+      <!-- Products will be loaded here -->
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="#">Soko freshi</a>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <strong>Quick Links</strong>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Categories</strong>
+        <ul>
+          <li><a href="products.html?category=Fruits">Fruits</a></li>
+          <li><a href="products.html?category=Vegetables">Vegetables</a></li>
+          <li><a href="products.html?category=Fish & Meat">Fish & Meat</a></li>
+          <li><a href="products.html?category=Spices">Spices</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Contact</strong>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+          <li><i class="fas fa-phone-alt"></i> +254 758 599393</li>
+          <li><i class="fas fa-envelope"></i> angie@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="js/hide-nav-links.js"></script>
+  <script>
+    // Check login state
+    document.addEventListener('DOMContentLoaded', function() {
+      const guestNav = document.getElementById('guest-nav');
+      const userNav = document.getElementById('user-nav');
+      
+      // Check if user is logged in
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      
+      if (isLoggedIn) {
+        guestNav.style.display = 'none';
+        userNav.style.display = 'flex';
+      } else {
+        guestNav.style.display = 'flex';
+        userNav.style.display = 'none';
+      }
+      
+      // Logout functionality
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Clear local storage
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('userEmail');
+          localStorage.removeItem('userRole');
+          localStorage.removeItem('userName');
+          
+          // Redirect to home page
+          window.location.href = 'index.html';
+        });
+      }
+    });
+  </script>
+  <script src="js/shared-products.js"></script>
+  <script>
+    // Set up category filter
+    document.getElementById('category-filter').addEventListener('change', function() {
+      const category = this.value;
+      if (category) {
+        window.location.href = 'products.html?category=' + encodeURIComponent(category);
+      } else {
+        window.location.href = 'products.html';
+      }
+    });
+    
+    // Set the category filter value based on URL parameter
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoryFilter = urlParams.get('category');
+      if (categoryFilter) {
+        document.getElementById('category-filter').value = categoryFilter;
+      }
+    });
+  </script>
+</body>
+</html>

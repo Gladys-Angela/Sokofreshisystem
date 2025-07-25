@@ -1,0 +1,140 @@
+/* Empty State Styling for Vendor Portal */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 30px;
+  text-align: center;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin: 30px 0;
+  border: 1px solid #e2e8f0;
+}
+
+.empty-icon {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border-radius: 50%;
+  margin-bottom: 25px;
+}
+
+.empty-icon i {
+  font-size: 50px;
+  color: #94a3b8;
+}
+
+.empty-state h4 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #334155;
+  margin: 0 0 15px 0;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0 0 30px 0;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.empty-state .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(to right, #00b761, #00d68f);
+  color: white;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 183, 97, 0.2);
+}
+
+.empty-state .btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 183, 97, 0.3);
+}
+
+.empty-state .btn-primary i {
+  font-size: 18px;
+}
+
+/* Specific Empty States */
+
+/* Empty Products */
+.empty-products .empty-icon {
+  background: #f0fdf4;
+}
+
+.empty-products .empty-icon i {
+  color: #00b761;
+}
+
+/* Empty Sales */
+.empty-sales .empty-icon {
+  background: #eff6ff;
+}
+
+.empty-sales .empty-icon i {
+  color: #3b82f6;
+}
+
+/* Empty Reviews */
+.empty-reviews .empty-icon {
+  background: #fef3c7;
+}
+
+.empty-reviews .empty-icon i {
+  color: #f59e0b;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.empty-state {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .empty-state {
+    padding: 40px 20px;
+  }
+  
+  .empty-icon {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .empty-icon i {
+    font-size: 40px;
+  }
+  
+  .empty-state h4 {
+    font-size: 20px;
+  }
+  
+  .empty-state p {
+    font-size: 15px;
+  }
+}

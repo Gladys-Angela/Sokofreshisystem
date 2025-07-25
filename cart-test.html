@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Cart Test</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,
+    600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    .test-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .test-section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .test-section h3 {
+      margin-top: 0;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .test-button {
+      background-color: #00b761;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .test-button:hover {
+      background-color: #009d53;
+    }
+    
+    .test-result {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #f5f5f5;
+    }
+    
+    .success {
+      color: #00b761;
+      font-weight: bold;
+    }
+    
+    .error {
+      color: #ff5252;
+      font-weight: bold;
+    }
+    
+    .product-box {
+      border: 1px solid #eee;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .product-box img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      margin-right: 15px;
+      border-radius: 5px;
+    }
+    
+    .product-info {
+      flex: 1;
+    }
+    
+    .product-info strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    
+    .product-info .quantity {
+      display: block;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    
+    .product-info .price {
+      font-weight: 600;
+      color: #00b761;
+    }
+    
+    .cart-btn {
+      background-color: #00b761;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+    
+    .cart-btn:hover {
+      background-color: #009d53;
+    }
+    
+    #cart-display {
+      margin-top: 20px;
+    }
+    
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      margin-right: 15px;
+      border-radius: 5px;
+    }
+    
+    .item-details {
+      flex: 1;
+    }
+    
+    .item-details strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+    
+    .item-details .quantity {
+      display: block;
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    
+    .item-details .price {
+      font-weight: 600;
+      color: #00b761;
+    }
+    
+    .item-count {
+      background-color: #eee;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      margin-left: 5px;
+    }
+    
+    .remove-btn {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    
+    .remove-btn:hover {
+      background-color: #ff5252;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="index.html" data-translate="home">Home</a></li>
+      <li><a href="products.html" data-translate="products">Products</a></li>
+      <li><a href="cart.html" data-translate="cart">Cart</a></li>
+    </ul>
+    <div class="right-nav">
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span>0</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="test-container">
+    <h2>Cart Functionality Test</h2>
+    <p>This page helps test and debug the cart functionality.</p>
+    
+    <div class="test-section">
+      <h3>Test Environment</h3>
+      <button id="check-environment" class="test-button">Check Environment</button>
+      <div id="environment-result" class="test-result"></div>
+    </div>
+    
+    <div class="test-section">
+      <h3>Test Products</h3>
+      <div class="product-box">
+        <img src="images/apple.jpg" alt="Apple">
+        <div class="product-info">
+          <strong>Apple</strong>
+          <span class="quantity">1 KG</span>
+          <span class="price">Ksh150</span>
+        </div>
+        <button class="cart-btn" data-product-id="apple-test">
+          <i class="fas fa-shopping-bag"></i> Add to Cart
+        </button>
+      </div>
+      
+      <div class="product-box">
+        <img src="images/orange.jpg" alt="Orange">
+        <div class="product-info">
+          <strong>Orange</strong>
+          <span class="quantity">1 KG</span>
+          <span class="price">Ksh180</span>
+        </div>
+        <button class="cart-btn" data-product-id="orange-test">
+          <i class="fas fa-shopping-bag"></i> Add to Cart
+        </button>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h3>Cart Operations</h3>
+      <button id="view-cart" class="test-button">View Cart</button>
+      <button id="clear-cart" class="test-button">Clear Cart</button>
+      <div id="cart-display"></div>
+    </div>
+    
+    <div class="test-section">
+      <h3>Navigation Test</h3>
+      <button id="test-navigation" class="test-button">Test Cart Navigation</button>
+      <div id="navigation-result" class="test-result"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/cart-unified-fix.js"></script>
+  <script src="js/cart-fix-test.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check environment button
+      document.getElementById('check-environment').addEventListener('click', function() {
+        const resultDiv = document.getElementById('environment-result');
+        resultDiv.innerHTML = '';
+        
+        try {
+          // Check Firebase
+          if (typeof firebase !== 'undefined') {
+            resultDiv.innerHTML += '<span class="success">✓ Firebase is loaded</span>\n';
+          } else {
+            resultDiv.innerHTML += '<span class="error">✗ Firebase is not loaded</span>\n';
+          }
+          
+          // Check Firebase Auth
+          if (typeof firebase !== 'undefined' && typeof firebase.auth === 'function') {
+            resultDiv.innerHTML += '<span class="success">✓ Firebase Auth is available</span>\n';
+          } else {
+            resultDiv.innerHTML += '<span class="error">✗ Firebase Auth is not available</span>\n';
+          }
+          
+          // Check Firebase Firestore
+          if (typeof firebase !== 'undefined' && typeof firebase.firestore === 'function') {
+            resultDiv.innerHTML += '<span class="success">✓ Firebase Firestore is available</span>\n';
+          } else {
+            resultDiv.innerHTML += '<span class="error">✗ Firebase Firestore is not available</span>\n';
+          }
+          
+          // Check cart functions
+          if (typeof window.addToCart === 'function') {
+            resultDiv.innerHTML += '<span class="success">✓ addToCart function is available</span>\n';
+          } else {
+            resultDiv.innerHTML += '<span class="error">✗ addToCart function is not available</span>\n';
+          }
+          
+          if (typeof window.setupCartButtons === 'function') {
+            resultDiv.innerHTML += '<span class="success">✓ setupCartButtons function is available</span>\n';
+          } else {
+            resultDiv.innerHTML += '<span class="error">✗ setupCartButtons function is not available</span>\n';
+          }
+          
+          // Check localStorage
+          try {
+            localStorage.setItem('test', 'test');
+            localStorage.removeItem('test');
+            resultDiv.innerHTML += '<span class="success">✓ localStorage is working</span>\n';
+          } catch (e) {
+            resultDiv.innerHTML += '<span class="error">✗ localStorage error: ' + e.message + '</span>\n';
+          }
+          
+          // Check if user is logged in
+          const user = firebase.auth().currentUser;
+          if (user) {
+            resultDiv.innerHTML += '<span class="success">✓ User is logged in: ' + user.email + '</span>\n';
+          } else {
+            resultDiv.innerHTML += '<span class="error">✗ No user is logged in</span>\n';
+          }
+          
+        } catch (e) {
+          resultDiv.innerHTML += '<span class="error">Error during environment check: ' + e.message + '</span>\n';
+        }
+      });
+      
+      // Setup cart buttons
+      document.querySelectorAll('.cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const productId = this.getAttribute('data-product-id');
+          const productBox = this.closest('.product-box');
+          
+          const product = {
+            id: productId,
+            name: productBox.querySelector('strong').textContent,
+            price: productBox.querySelector('.price').textContent.replace('Ksh', '').trim(),
+            quantity: productBox.querySelector('.quantity').textContent,
+            imageUrl: productBox.querySelector('img').src
+          };
+          
+          if (typeof window.addToCart === 'function') {
+            window.addToCart(product);
+          } else {
+            alert('addToCart function is not available');
+          }
+        });
+      });
+      
+      // View cart button
+      document.getElementById('view-cart').addEventListener('click', function() {
+        const cartDisplay = document.getElementById('cart-display');
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        if (cart.length === 0) {
+          cartDisplay.innerHTML = '<p>Your cart is empty</p>';
+          return;
+        }
+        
+        let cartHtml = '';
+        let total = 0;
+        
+        // Filter for current user's items if logged in
+        const user = firebase.auth().currentUser;
+        const userCart = user ? cart.filter(item => item.userId === user.uid) : cart;
+        
+        userCart.forEach(item => {
+          const itemTotal = parseFloat(item.price) * item.count;
+          total += itemTotal;
+          
+          cartHtml += `
+            <div class="cart-item">
+              <img src="${item.image}" alt="${item.name}">
+              <div class="item-details">
+                <strong>${item.name} <span class="item-count">x${item.count}</span></strong>
+                <span class="quantity">${item.quantity}</span>
+                <span class="price">Ksh${itemTotal}</span>
+              </div>
+              <button class="remove-btn" data-id="${item.id}">Remove</button>
+            </div>
+          `;
+        });
+        
+        cartHtml += `<div style="text-align: right; margin-top: 15px;"><strong>Total: Ksh${total.toFixed(2)}</strong></div>`;
+        cartDisplay.innerHTML = cartHtml;
+        
+        // Add remove button functionality
+        document.querySelectorAll('.remove-btn').forEach(button => {
+          button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            const user = firebase.auth().currentUser;
+            if (!user) return;
+            
+            const allCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const newCart = allCartItems.filter(item => !(item.id === itemId && item.userId === user.uid));
+            localStorage.setItem('cart', JSON.stringify(newCart));
+            
+            // Refresh cart display
+            document.getElementById('view-cart').click();
+            
+            // Update cart count
+            if (typeof window.updateCartCount === 'function') {
+              window.updateCartCount();
+            }
+          });
+        });
+      });
+      
+      // Clear cart button
+      document.getElementById('clear-cart').addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear your cart?')) {
+          localStorage.setItem('cart', '[]');
+          document.getElementById('cart-display').innerHTML = '<p>Your cart has been cleared</p>';
+          
+          // Update cart count
+          const cartCountElements = document.querySelectorAll('.cart span');
+          cartCountElements.forEach(element => {
+            element.textContent = '0';
+          });
+        }
+      });
+      
+      // Test navigation button
+      document.getElementById('test-navigation').addEventListener('click', function() {
+        const resultDiv = document.getElementById('navigation-result');
+        resultDiv.innerHTML = 'Testing cart navigation...';
+        
+        // Check if cart links have correct href
+        const cartLinks = document.querySelectorAll('a.cart');
+        let allCorrect = true;
+        
+        cartLinks.forEach(link => {
+          if (link.getAttribute('href') !== 'cart.html') {
+            allCorrect = false;
+            resultDiv.innerHTML += `\n<span class="error">✗ Cart link has incorrect href: ${link.getAttribute('href')}</span>`;
+          }
+        });
+        
+        if (allCorrect) {
+          resultDiv.innerHTML = '<span class="success">✓ All cart links have correct href</span>';
+          resultDiv.innerHTML += '\n<span class="success">✓ Click the cart icon to test navigation</span>';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

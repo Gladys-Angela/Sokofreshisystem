@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/help-button.css" />
+  <link rel="stylesheet" type="text/css" href="css/chatbot.css" />
+  <link rel="stylesheet" type="text/css" href="css/customer-dashboard.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+
+</head>
+
+<body>
+  <!-- Help Button -->
+  <div class="help-button-container">
+    <button id="help-button" class="help-button">
+      <i class="fas fa-question-circle"></i> Help
+    </button>
+    <div id="help-dropdown" class="help-dropdown">
+      <div class="help-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="products.html"><i class="fas fa-shopping-bag"></i> Place Order</a></li>
+          <li><a href="my_orders.html"><i class="fas fa-times-circle"></i> Cancel Order</a></li>
+          <li><a href="my_orders.html"><i class="fas fa-truck"></i> Track Order</a></li>
+        </ul>
+      </div>
+      <div class="help-section">
+        <h4>Need Help?</h4>
+        <ul>
+          <li><a href="#" id="chat-with-us"><i class="fas fa-comment"></i> Chat with Us</a></li>
+          <li><a href="help_center.html"><i class="fas fa-info-circle"></i> Help Center</a></li>
+          <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="my_orders.html">My Orders</a></li>
+      <li><a href="customer_dashboard.html" class="active">Dashboard</a></li>
+    </ul>
+    <div class="right-nav">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+
+  <section id="popular-product">
+    <div class="product-heading">
+      <h3>Customer Dashboard</h3>
+      <span>Welcome to your personalized dashboard</span>
+    </div>
+    
+    <div class="dashboard-container">
+      <div class="dashboard-card">
+        <div class="icon"><i class="fas fa-shopping-bag"></i></div>
+        <h4>My Orders</h4>
+        <p>Total Orders</p>
+        <div class="highlight" id="total-orders">0</div>
+        <p>Recent Order: <span id="recent-order-date">None</span></p>
+        <a href="my_orders.html" class="dashboard-btn">View All Orders</a>
+      </div>
+      
+      <div class="dashboard-card">
+        <div class="icon"><i class="fas fa-star"></i></div>
+        <h4>My Reviews</h4>
+        <p>Total Reviews</p>
+        <div class="highlight" id="total-reviews">0</div>
+        <p>Average Rating: <span id="avg-rating">0.0</span></p>
+        <a href="my_reviews.html" class="dashboard-btn">View All Reviews</a>
+      </div>
+      
+      <div class="dashboard-card">
+        <div class="icon"><i class="fas fa-user"></i></div>
+        <h4>My Profile</h4>
+        <p>Welcome back,</p>
+        <div class="highlight" id="user-name">Customer</div>
+        <p>Member since: <span id="member-since">Today</span></p>
+        <a href="edit_profile.html" class="dashboard-btn">Edit Profile</a>
+      </div>
+    </div>
+    
+    <div class="product-heading" style="margin-top: 40px;">
+      <h3>Shop by Vendor</h3>
+      <span>Browse products from our trusted vendors</span>
+    </div>
+    
+    <div class="vendors-container" id="vendors-list">
+      <!-- Vendors will be loaded here dynamically -->
+      <p>Loading vendors...</p>
+    </div>
+    
+    <div class="product-heading" style="margin-top: 40px;">
+      <h3>Latest Products</h3>
+      <span>Fresh products added by our vendors</span>
+    </div>
+    
+    <div class="product-container" id="dashboard-vendor-products">
+      <!-- Latest vendor products will be loaded here dynamically -->
+      <p>Loading products...</p>
+    </div>
+    
+    <div class="product-heading" style="margin-top: 30px;">
+      <h3>Quick Actions</h3>
+      <span>Shortcuts to frequently used features</span>
+    </div>
+    
+    <div class="quick-actions">
+      <a href="products.html" class="action-btn">
+        <i class="fas fa-store"></i>
+        <span>Shop Now</span>
+      </a>
+      <a href="cart.html" class="action-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span>View Cart</span>
+      </a>
+      <a href="my_orders.html" class="action-btn">
+        <i class="fas fa-box"></i>
+        <span>Track Orders</span>
+      </a>
+      <a href="my_reviews.html" class="action-btn">
+        <i class="fas fa-star"></i>
+        <span>My Reviews</span>
+      </a>
+      <a href="wishlist.html" class="action-btn">
+        <i class="fas fa-heart"></i>
+        <span>Wishlist</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="#">Soko freshi</a>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <strong>Quick Links</strong>
+        <ul>
+          <li><a href="customer_dashboard.html">Dashboard</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="my_orders.html">My Orders</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Categories</strong>
+        <ul>
+          <li><a href="products.html?category=Fruits">Fruits</a></li>
+          <li><a href="products.html?category=Vegetables">Vegetables</a></li>
+          <li><a href="products.html?category=Fish & Meat">Fish & Meat</a></li>
+          <li><a href="products.html?category=Spices">Spices</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Contact Us</strong>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> 123, ABC Street, XYZ City</li>
+          <li><i class="fas fa-phone-alt"></i> +254 758 599393</li>
+          <li><i class="fas fa-envelope"></i> angie@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Firebase SDKs - Using a more stable version -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.appspot.com",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  </script>
+  <script src="js/help-button.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+  <script src="js/simple-role-guard.js"></script>
+  <script>
+    // Initialize Firestore
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+    
+    // Simple dashboard initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      // Display user info from localStorage
+      const userEmail = localStorage.getItem('userEmail') || 'Customer';
+      document.getElementById('user-name').textContent = userEmail;
+      
+      // Load vendors from Firestore
+      async function loadVendors() {
+        try {
+          const vendorsContainer = document.getElementById('vendors-list');
+          if (!vendorsContainer) return;
+          
+          vendorsContainer.innerHTML = '<p>Loading vendors...</p>';
+          
+          const vendorsSnapshot = await db.collection('users')
+            .where('userRole', '==', 'vendor')
+            .limit(8)
+            .get();
+          
+          if (vendorsSnapshot.empty) {
+            vendorsContainer.innerHTML = '<p>No vendors available at the moment.</p>';
+            return;
+          }
+          
+          let vendorsHTML = '';
+          vendorsSnapshot.forEach(doc => {
+            const vendor = doc.data();
+            const storeName = vendor.storeName || vendor.userEmail || 'Store';
+            const storeCategory = vendor.storeCategory || 'Various Products';
+            
+            vendorsHTML += `
+              <div class="vendor-card">
+                <div class="vendor-icon"><i class="fas fa-store"></i></div>
+                <h4>${storeName}</h4>
+                <p>${storeCategory}</p>
+                <a href="products.html?vendor=${doc.id}" class="vendor-btn">Shop Now</a>
+              </div>
+            `;
+          });
+          
+          // If no vendors found in Firestore, show default categories
+          if (!vendorsHTML) {
+            vendorsHTML = `
+              <div class="vendor-card">
+                <div class="vendor-icon"><i class="fas fa-store"></i></div>
+                <h4>Fresh Fruits Store</h4>
+                <p>Fruits</p>
+                <a href="products.html?category=Fruits" class="vendor-btn">Shop Now</a>
+              </div>
+              <div class="vendor-card">
+                <div class="vendor-icon"><i class="fas fa-store"></i></div>
+                <h4>Green Vegetables</h4>
+                <p>Vegetables</p>
+                <a href="products.html?category=Vegetables" class="vendor-btn">Shop Now</a>
+              </div>
+              <div class="vendor-card">
+                <div class="vendor-icon"><i class="fas fa-store"></i></div>
+                <h4>Meat & Fish Market</h4>
+                <p>Fish & Meat</p>
+                <a href="products.html?category=Fish%20%26%20Meat" class="vendor-btn">Shop Now</a>
+              </div>
+              <div class="vendor-card">
+                <div class="vendor-icon"><i class="fas fa-store"></i></div>
+                <h4>Spice World</h4>
+                <p>Spices</p>
+                <a href="products.html?category=Spices" class="vendor-btn">Shop Now</a>
+              </div>
+            `;
+          }
+          
+          vendorsContainer.innerHTML = vendorsHTML;
+        } catch (error) {
+          console.error('Error loading vendors:', error);
+          document.getElementById('vendors-list').innerHTML = '<p>Error loading vendors. Please try again later.</p>';
+        }
+      }
+      
+      // Load vendors when page loads
+      loadVendors();
+      
+      document.getElementById('dashboard-vendor-products').innerHTML = `
+        <p>No products available at the moment. Please check back later.</p>
+      `;
+      
+      // Logout button
+      document.getElementById('logout-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        firebase.auth().signOut().then(() => {
+          localStorage.removeItem('userRole');
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('userEmail');
+          localStorage.removeItem('userName');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('roleMigrationRun');
+          window.location.href = 'index.html';
+        }).catch((error) => {
+          alert(error.message);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

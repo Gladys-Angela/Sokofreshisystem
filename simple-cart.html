@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Cart</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    .cart-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; display: flex; }
+    .cart-item img { width: 50px; height: 50px; margin-right: 10px; }
+    .remove-btn { background: red; color: white; border: none; padding: 5px; cursor: pointer; }
+    .empty-cart { text-align: center; padding: 20px; }
+    .back-btn { display: inline-block; margin-bottom: 20px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">← Back to Home</a>
+  <h1>Your Cart</h1>
+  
+  <div id="cart-items"></div>
+  <div id="cart-total"></div>
+  
+  <script>
+    // Get cart from localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalContainer = document.getElementById('cart-total');
+    
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+    } else {
+      let total = 0;
+      let html = '';
+      
+      cart.forEach(item => {
+        const itemTotal = parseFloat(item.price) * item.count;
+        total += itemTotal;
+        
+        html += `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div>
+              <strong>${item.name}</strong>
+              <p>Quantity: ${item.count}</p>
+              <p>Price: Ksh${itemTotal}</p>
+            </div>
+            <button class="remove-btn" data-id="${item.id}">Remove</button>
+          </div>
+        `;
+      });
+      
+      cartItemsContainer.innerHTML = html;
+      cartTotalContainer.innerHTML = `<strong>Total: Ksh${total.toFixed(2)}</strong>`;
+      
+      // Handle remove button clicks
+      document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const itemId = this.getAttribute('data-id');
+          const newCart = cart.filter(item => item.id !== itemId);
+          localStorage.setItem('cart', JSON.stringify(newCart));
+          location.reload();
+        });
+      });
+    }
+  </script>
+</body>
+</html>

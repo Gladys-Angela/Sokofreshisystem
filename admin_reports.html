@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Reports - Soko freshi</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="css/language-selector.css">
+  <style>
+    :root {
+      --primary-color: #00b761;
+      --primary-dark: #009d53;
+      --secondary-color: #f8f9fa;
+      --text-color: #333;
+      --light-text: #666;
+      --white: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --border-radius: 10px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      padding: 20px 0;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+    
+    .sidebar-header {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar-header .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    
+    .sidebar-header .logo span {
+      color: var(--primary-color);
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+    }
+    
+    .sidebar-menu li {
+      margin-bottom: 5px;
+    }
+    
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: var(--light-text);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .sidebar-menu a:hover {
+      background-color: rgba(0, 183, 97, 0.1);
+      color: var(--primary-color);
+    }
+    
+    .sidebar-menu a.active {
+      background-color: rgba(0, 183, 97, 0.1);
+      color: var(--primary-color);
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .sidebar-menu i {
+      margin-right: 10px;
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 250px;
+      padding: 20px;
+      transition: var(--transition);
+    }
+    
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .page-header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+    
+    .user-info .user-name {
+      margin-right: 15px;
+      font-weight: 500;
+    }
+    
+    .user-info .logout-btn {
+      background-color: #f1f1f1;
+      color: var(--text-color);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+    }
+    
+    .user-info .logout-btn:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .user-info .logout-btn i {
+      margin-right: 5px;
+    }
+    
+    /* Report Cards */
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .report-card {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      transition: var(--transition);
+    }
+    
+    .report-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .report-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .report-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .report-header .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    
+    .report-body {
+      margin-bottom: 15px;
+    }
+    
+    .report-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .report-label {
+      font-size: 14px;
+      color: var(--light-text);
+    }
+    
+    .report-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    
+    .report-trend {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .trend-up {
+      color: #28a745;
+    }
+    
+    .trend-down {
+      color: #dc3545;
+    }
+    
+    .trend-neutral {
+      color: #6c757d;
+    }
+    
+    .report-trend i {
+      margin-right: 5px;
+    }
+    
+    .report-period {
+      font-size: 14px;
+      color: var(--light-text);
+    }
+    
+    /* Chart Container */
+    .chart-container {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .chart-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .chart-options {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .chart-options select {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+      background-color: var(--white);
+      color: var(--text-color);
+    }
+    
+    .chart-body {
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--light-text);
+    }
+    
+    /* Tables */
+    .table-container {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .table-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .table-responsive {
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    table th, table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
+    table th {
+      font-weight: 600;
+      color: var(--light-text);
+      font-size: 14px;
+    }
+    
+    table tbody tr:hover {
+      background-color: rgba(0, 183, 97, 0.05);
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar {
+        width: 70px;
+        overflow: hidden;
+      }
+      
+      .sidebar-header {
+        padding: 0 10px 20px;
+      }
+      
+      .sidebar-header .logo span:not(:first-child) {
+        display: none;
+      }
+      
+      .sidebar-menu a span {
+        display: none;
+      }
+      
+      .sidebar-menu a {
+        justify-content: center;
+        padding: 12px;
+      }
+      
+      .sidebar-menu i {
+        margin-right: 0;
+      }
+      
+      .main-content {
+        margin-left: 70px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .chart-options {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <a href="admin_dashboard.html" class="logo">
+          Soko freshi
+        </a>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li>
+          <a href="admin_dashboard.html">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_users.html">
+            <i class="fas fa-users"></i>
+            <span>Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_vendors.html">
+            <i class="fas fa-store"></i>
+            <span>Vendors</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_products.html">
+            <i class="fas fa-box"></i>
+            <span>Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_orders.html">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_reports.html" class="active">
+            <i class="fas fa-chart-bar"></i>
+            <span>Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.html">
+            <i class="fas fa-home"></i>
+            <span>Visit Site</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="page-header">
+        <h1>Reports & Analytics</h1>
+        <div class="user-info">
+          <span class="user-name" id="admin-name">Admin</span>
+          <button class="logout-btn" id="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+      
+      <!-- Report Cards -->
+      <div class="report-grid">
+        <div class="report-card">
+          <div class="report-header">
+            <h3>Total Revenue</h3>
+            <div class="icon" style="background-color: rgba(0, 183, 97, 0.1); color: #00b761;">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-value">Ksh 458,290</div>
+            <div class="report-label">Total revenue this month</div>
+          </div>
+          <div class="report-footer">
+            <div class="report-trend trend-up">
+              <i class="fas fa-arrow-up"></i> 12.5%
+            </div>
+            <div class="report-period">vs last month</div>
+          </div>
+        </div>
+        
+        <div class="report-card">
+          <div class="report-header">
+            <h3>Total Orders</h3>
+            <div class="icon" style="background-color: rgba(0, 123, 255, 0.1); color: #007bff;">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-value">3,542</div>
+            <div class="report-label">Total orders this month</div>
+          </div>
+          <div class="report-footer">
+            <div class="report-trend trend-up">
+              <i class="fas fa-arrow-up"></i> 8.2%
+            </div>
+            <div class="report-period">vs last month</div>
+          </div>
+        </div>
+        
+        <div class="report-card">
+          <div class="report-header">
+            <h3>New Customers</h3>
+            <div class="icon" style="background-color: rgba(255, 153, 0, 0.1); color: #ff9900;">
+              <i class="fas fa-user-plus"></i>
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-value">245</div>
+            <div class="report-label">New customers this month</div>
+          </div>
+          <div class="report-footer">
+            <div class="report-trend trend-up">
+              <i class="fas fa-arrow-up"></i> 5.7%
+            </div>
+            <div class="report-period">vs last month</div>
+          </div>
+        </div>
+        
+        <div class="report-card">
+          <div class="report-header">
+            <h3>Average Order Value</h3>
+            <div class="icon" style="background-color: rgba(111, 66, 193, 0.1); color: #6f42c1;">
+              <i class="fas fa-receipt"></i>
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-value">Ksh 1,250</div>
+            <div class="report-label">Average order value this month</div>
+          </div>
+          <div class="report-footer">
+            <div class="report-trend trend-up">
+              <i class="fas fa-arrow-up"></i> 3.2%
+            </div>
+            <div class="report-period">vs last month</div>
+          </div>
+        </div>
+        
+        <div class="report-card">
+          <div class="report-header">
+            <h3>Conversion Rate</h3>
+            <div class="icon" style="background-color: rgba(40, 167, 69, 0.1); color: #28a745;">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-value">4.8%</div>
+            <div class="report-label">Visitor to customer conversion</div>
+          </div>
+          <div class="report-footer">
+            <div class="report-trend trend-up">
+              <i class="fas fa-arrow-up"></i> 0.5%
+            </div>
+            <div class="report-period">vs last month</div>
+          </div>
+        </div>
+        
+        <div class="report-card">
+          <div class="report-header">
+            <h3>Cancellation Rate</h3>
+            <div class="icon" style="background-color: rgba(220, 53, 69, 0.1); color: #dc3545;">
+              <i class="fas fa-ban"></i>
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-value">3.2%</div>
+            <div class="report-label">Order cancellation rate</div>
+          </div>
+          <div class="report-footer">
+            <div class="report-trend trend-down">
+              <i class="fas fa-arrow-down"></i> 0.8%
+            </div>
+            <div class="report-period">vs last month</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sales Chart -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <h3>Sales Overview</h3>
+          <div class="chart-options">
+            <select>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly" selected>Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+            
+            <select>
+              <option value="revenue">Revenue</option>
+              <option value="orders">Orders</option>
+              <option value="customers">Customers</option>
+            </select>
+          </div>
+        </div>
+        <div class="chart-body">
+          <p>Chart visualization would be displayed here. For a real implementation, you would use a charting library like Chart.js or ApexCharts.</p>
+        </div>
+      </div>
+      
+      <!-- Top Products -->
+      <div class="table-container">
+        <div class="table-header">
+          <h3>Top Selling Products</h3>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Vendor</th>
+                <th>Price</th>
+                <th>Units Sold</th>
+                <th>Revenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fresh Apples</td>
+                <td>Fruits</td>
+                <td>Fruit Paradise</td>
+                <td>Ksh 150</td>
+                <td>450</td>
+                <td>Ksh 67,500</td>
+              </tr>
+              <tr>
+                <td>Fresh Tilapia</td>
+                <td>Fish & Meat</td>
+                <td>Meat Masters</td>
+                <td>Ksh 450</td>
+                <td>120</td>
+                <td>Ksh 54,000</td>
+              </tr>
+              <tr>
+                <td>Fresh Tomatoes</td>
+                <td>Vegetables</td>
+                <td>Green Grocers</td>
+                <td>Ksh 120</td>
+                <td>380</td>
+                <td>Ksh 45,600</td>
+              </tr>
+              <tr>
+                <td>Fresh Oranges</td>
+                <td>Fruits</td>
+                <td>Fruit Paradise</td>
+                <td>Ksh 180</td>
+                <td>250</td>
+                <td>Ksh 45,000</td>
+              </tr>
+              <tr>
+                <td>Mixed Spices</td>
+                <td>Spices</td>
+                <td>Organic Delights</td>
+                <td>Ksh 200</td>
+                <td>180</td>
+                <td>Ksh 36,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Top Vendors -->
+      <div class="table-container">
+        <div class="table-header">
+          <h3>Top Performing Vendors</h3>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Vendor</th>
+                <th>Category</th>
+                <th>Products</th>
+                <th>Orders</th>
+                <th>Revenue</th>
+                <th>Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fruit Paradise</td>
+                <td>Fruits</td>
+                <td>24</td>
+                <td>850</td>
+                <td>Ksh 125,400</td>
+                <td>4.8/5</td>
+              </tr>
+              <tr>
+                <td>Meat Masters</td>
+                <td>Fish & Meat</td>
+                <td>18</td>
+                <td>620</td>
+                <td>Ksh 98,500</td>
+                <td>4.6/5</td>
+              </tr>
+              <tr>
+                <td>Green Grocers</td>
+                <td>Vegetables</td>
+                <td>32</td>
+                <td>780</td>
+                <td>Ksh 85,200</td>
+                <td>4.7/5</td>
+              </tr>
+              <tr>
+                <td>Organic Delights</td>
+                <td>Mixed Products</td>
+                <td>45</td>
+                <td>540</td>
+                <td>Ksh 76,800</td>
+                <td>4.5/5</td>
+              </tr>
+              <tr>
+                <td>Spice World</td>
+                <td>Spices</td>
+                <td>28</td>
+                <td>420</td>
+                <td>Ksh 58,400</td>
+                <td>4.4/5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs - Auth only -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.appspot.com",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  </script>
+  <script src="js/simple-role-guard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set admin name from localStorage
+      const adminEmail = localStorage.getItem('userEmail') || 'Admin';
+      document.getElementById('admin-name').textContent = adminEmail;
+      
+      // Logout functionality
+      document.getElementById('logout-btn').addEventListener('click', function() {
+        // Sign out from Firebase Auth
+        firebase.auth().signOut().then(() => {
+          // Clear login state
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('userRole');
+          localStorage.removeItem('userEmail');
+          localStorage.removeItem('userId');
+          
+          // Redirect to home page
+          window.location.href = 'index.html';
+        }).catch((error) => {
+          console.error('Error signing out:', error);
+        });
+      });
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/universal-translate.js"></script>
+</body>
+</html>

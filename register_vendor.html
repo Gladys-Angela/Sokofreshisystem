@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register Vendor - Soko freshi Groceries</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/modern-registration.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/chatbot.css" />
+</head>
+<body>
+  <div class="language-selector">
+    <select id="language-selector">
+      <option value="en" data-translate="english">English</option>
+      <option value="sw" data-translate="swahili">Swahili</option>
+    </select>
+  </div>
+
+  <div class="registration-container">
+    <div class="registration-info">
+      <a href="index.html" class="logo" style="color: white; font-size: 2.5rem; margin-bottom: 20px;">
+        Soko freshi
+      </a>
+      <h2 data-translate="become_vendor">Become a Vendor</h2>
+      <p data-translate="vendor_benefits">Join our marketplace to sell your fresh products to thousands of customers. Manage your inventory, track sales, and grow your business with Soko freshi.</p>
+      
+      <div class="features">
+        <div class="feature-item">
+          <i class="fas fa-store"></i>
+          <span data-translate="own_store">Create your own online store</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-chart-line"></i>
+          <span data-translate="track_sales">Track your sales and growth</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-users"></i>
+          <span data-translate="reach_customers">Reach thousands of customers</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="registration-form">
+      <h2 data-translate="vendor_registration">Vendor Registration</h2>
+      <p data-translate="fill_details">Please fill in your details to create a vendor account</p>
+      <script src="js/translations.js"></script>
+      
+      <form id="register-form">
+        <!-- Store Details -->
+        <div class="form-section-title" data-translate="store_details">Store Details</div>
+        
+        <div class="form-group">
+          <label for="store_name" data-translate="store_name">Store Name</label>
+          <input type="text" id="store_name" name="store_name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="store_description" data-translate="store_description">Store Description</label>
+          <textarea id="store_description" name="store_description" placeholder="Describe your store and what you sell" maxlength="200"></textarea>
+          <small style="color: #666; display: block; margin-top: 5px;" data-translate="brief_description">Brief description (max 200 characters)</small>
+        </div>
+
+        <div class="form-group">
+          <label for="store_category" data-translate="store_category">Store Category</label>
+          <select id="store_category" name="store_category" required>
+            <option value="" data-translate="select_category">Select a category</option>
+            <option value="fruits" data-translate="fruits">Fruits</option>
+            <option value="vegetables" data-translate="vegetables">Vegetables</option>
+            <option value="fish_meat" data-translate="fish_meat">Fish & Meat</option>
+            <option value="spices" data-translate="spices">Spices</option>
+            <option value="mixed" data-translate="mixed_products">Mixed Products</option>
+          </select>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="form-section">
+          <div class="form-section-title" data-translate="contact_details">Contact Details</div>
+          
+          <div class="form-group">
+            <label for="phone" data-translate="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+
+          <div class="form-group">
+            <label for="location" data-translate="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="City, Area" required />
+          </div>
+        </div>
+
+        <!-- Account Information -->
+        <div class="form-section">
+          <div class="form-section-title" data-translate="account_details">Account Details</div>
+          
+          <div class="form-group">
+            <label for="email" data-translate="email">Email Address</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="password" data-translate="password">Password</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+
+          <div class="form-group">
+            <label for="confirm_password" data-translate="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" data-translate="register_as_vendor">Register as Vendor</button>
+      </form>
+      
+      <div class="registration-links">
+        <p><span data-translate="already_registered">Already registered?</span> <a href="login.html" data-translate="login_here">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auto-translate.js"></script>
+  <script src="js/efresh-chatbot.js"></script>
+  <!-- Firebase SDKs - Auth only -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.appspot.com",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+  <script>
+    // Initialize Firestore
+    const db = firebase.firestore();
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const registerForm = document.getElementById('register-form');
+      if (!registerForm) return;
+
+      // Add loading indicator
+      const showLoading = () => {
+        const button = registerForm.querySelector('button');
+        button.innerHTML = '<span style="display:inline-block;width:20px;height:20px;border:2px solid #fff;border-radius:50%;border-top-color:transparent;animation:spin 1s linear infinite;"></span> Registering...';
+        button.disabled = true;
+      };
+
+      const hideLoading = () => {
+        const button = registerForm.querySelector('button');
+        button.innerHTML = 'Register as Vendor';
+        button.disabled = false;
+      };
+
+      // Add CSS for spinner
+      document.head.insertAdjacentHTML('beforeend', `
+        <style>
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        </style>
+      `);
+
+      // Handle form submission
+      registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showLoading();
+
+        // Get form values
+        const email = registerForm.email.value.trim();
+        const password = registerForm.password.value;
+        const confirmPassword = registerForm.confirm_password.value;
+        const storeName = registerForm.store_name.value.trim();
+        const storeDescription = registerForm.store_description.value.trim();
+        const storeCategory = registerForm.store_category.value;
+        const phone = registerForm.phone.value.trim();
+        const location = registerForm.location.value.trim();
+        
+        if (password !== confirmPassword) {
+          hideLoading();
+          alert("Passwords do not match.");
+          return;
+        }
+        
+        // Create user with Firebase Auth
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            const userId = userCredential.user.uid;
+            
+            // Save vendor data to Firestore
+            return db.collection('users').doc(userId).set({
+              userEmail: email,
+              userRole: 'vendor',
+              storeName: storeName,
+              storeDescription: storeDescription,
+              storeCategory: storeCategory,
+              phone: phone,
+              location: location,
+              createdAt: new Date(),
+              approved: true // Auto-approve for simplicity
+            });
+          })
+          .then(() => {
+            // Store user info in localStorage
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userRole', 'vendor');
+            localStorage.setItem('userId', firebase.auth().currentUser.uid);
+            
+            // Also save to vendors array in localStorage
+            const vendors = JSON.parse(localStorage.getItem('vendors') || '[]');
+            vendors.push({
+              id: 'vendor-' + Date.now(),
+              email: email,
+              storeName: storeName,
+              storeCategory: storeCategory,
+              joinedDate: new Date().toISOString(),
+              status: 'active',
+              productsCount: 0,
+              revenue: 0
+            });
+            localStorage.setItem('vendors', JSON.stringify(vendors));
+            
+            // Update userRolesMap for compatibility
+            const userRolesMap = JSON.parse(localStorage.getItem('userRolesMap') || '{}');
+            userRolesMap[email] = 'vendor';
+            localStorage.setItem('userRolesMap', JSON.stringify(userRolesMap));
+            
+            // Show success message and redirect
+            alert('Vendor registration successful!');
+            window.location.href = 'vendor_dashboard.html';
+          })
+          .catch((error) => {
+            hideLoading();
+            console.error("Registration error:", error);
+            
+            if (error.code === 'auth/email-already-in-use') {
+              alert("This email is already registered. Please use a different email or try logging in.");
+            } else {
+              alert("Registration failed: " + error.message);
+            }
+          });
+      });
+    });
+  </script>
+  <script src="js/register-tracker.js"></script>
+</body>
+</html>

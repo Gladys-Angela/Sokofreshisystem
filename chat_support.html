@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Support | Soko freshi Groceries</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <style>
+    .chat-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #ecf7ee;
+    }
+    
+    .chat-header h1 {
+      color: #1a1a1a;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    
+    .back-btn {
+      display: flex;
+      align-items: center;
+      color: #4eb060;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .back-btn i {
+      margin-right: 5px;
+    }
+    
+    .back-btn:hover {
+      color: #00b761;
+    }
+    
+    .chat-box {
+      display: flex;
+      height: 70vh;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .chat-sidebar {
+      width: 30%;
+      background-color: #f9f9f9;
+      border-right: 1px solid #eee;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    
+    .chat-main {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .chat-header-info {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .agent-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #00b761;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      margin-right: 15px;
+    }
+    
+    .agent-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 3px;
+    }
+    
+    .agent-info p {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+    }
+    
+    .message {
+      margin-bottom: 15px;
+      max-width: 80%;
+    }
+    
+    .message-content {
+      padding: 12px 15px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      position: relative;
+    }
+    
+    .message-time {
+      font-size: 0.7rem;
+      color: #999;
+      margin-top: 5px;
+      text-align: right;
+    }
+    
+    .message.received {
+      align-self: flex-start;
+    }
+    
+    .message.received .message-content {
+      background-color: white;
+      color: #333;
+      border: 1px solid #eee;
+      border-top-left-radius: 0;
+    }
+    
+    .message.sent {
+      align-self: flex-end;
+      margin-left: auto;
+    }
+    
+    .message.sent .message-content {
+      background-color: #00b761;
+      color: white;
+      border-top-right-radius: 0;
+    }
+    
+    .chat-input {
+      padding: 15px;
+      border-top: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .chat-input input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    
+    .chat-input input:focus {
+      border-color: #00b761;
+    }
+    
+    .chat-input button {
+      background-color: #00b761;
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .chat-input button:hover {
+      background-color: #009d53;
+    }
+    
+    .chat-topic {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .chat-topic:hover {
+      background-color: #ecf7ee;
+    }
+    
+    .chat-topic.active {
+      background-color: #ecf7ee;
+      border-left: 3px solid #00b761;
+    }
+    
+    .chat-topic h3 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .chat-topic p {
+      font-size: 0.8rem;
+      color: #666;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .sidebar-header {
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .sidebar-header h2 {
+      font-size: 1.2rem;
+      color: #333;
+    }
+    
+    @media (max-width: 768px) {
+      .chat-box {
+        flex-direction: column;
+        height: 80vh;
+      }
+      
+      .chat-sidebar {
+        width: 100%;
+        height: 30%;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .chat-main {
+        width: 100%;
+        height: 70%;
+      }
+    }
+  </style>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a href="vendor_home.html" class="logo">
+      Soko freshi <small>Support</small>
+    </a>
+    
+    <ul class="menu">
+      <li><a href="vendor_home.html">Dashboard</a></li>
+      <li><a href="manage_products.html">Products</a></li>
+      <li><a href="sales_history.html">Sales</a></li>
+      <li><a href="help_center.html">Help</a></li>
+    </ul>
+    
+    <div class="right-nav">
+      <a href="#" id="profile-btn" class="profile">
+        <i class="fas fa-user"></i>
+        <span>Profile</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+  
+  <!-- Main Content -->
+  <div class="chat-container">
+    <div class="chat-header">
+      <h1>Chat Support</h1>
+      <a href="javascript:history.back()" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back
+      </a>
+    </div>
+    
+    <div class="chat-box">
+      <div class="chat-sidebar">
+        <div class="sidebar-header">
+          <h2>Support Topics</h2>
+        </div>
+        
+        <div class="chat-topic active" onclick="selectTopic(this, 'general')">
+          <h3>General Support</h3>
+          <p>Get help with general questions</p>
+        </div>
+        
+        <div class="chat-topic" onclick="selectTopic(this, 'products')">
+          <h3>Product Issues</h3>
+          <p>Help with adding or managing products</p>
+        </div>
+        
+        <div class="chat-topic" onclick="selectTopic(this, 'orders')">
+          <h3>Order Management</h3>
+          <p>Support for order processing</p>
+        </div>
+        
+        <div class="chat-topic" onclick="selectTopic(this, 'payments')">
+          <h3>Payment Support</h3>
+          <p>Help with payment issues</p>
+        </div>
+        
+        <div class="chat-topic" onclick="selectTopic(this, 'technical')">
+          <h3>Technical Support</h3>
+          <p>Help with technical issues</p>
+        </div>
+      </div>
+      
+      <div class="chat-main">
+        <div class="chat-header-info">
+          <div class="agent-avatar">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div class="agent-info">
+            <h3>Support Agent</h3>
+            <p>Typically replies in 5 minutes</p>
+          </div>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+          <div class="message received">
+            <div class="message-content">
+              👋 Hello! Welcome to Soko freshi Support. How can I help you today?
+            </div>
+            <div class="message-time">Just now</div>
+          </div>
+        </div>
+        
+        <div class="chat-input">
+          <input type="text" id="message-input" placeholder="Type your message here..." onkeypress="handleKeyPress(event)">
+          <button onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Initialize Firebase
+    firebase.initializeApp({
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      projectId: "efresh-56b75"
+    });
+    
+    // Check authentication status
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (!user) {
+        window.location.href = 'login.html?redirect=chat_support.html';
+      }
+    });
+    
+    // Chat functionality
+    let currentTopic = 'general';
+    
+    function selectTopic(element, topic) {
+      // Remove active class from all topics
+      document.querySelectorAll('.chat-topic').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      // Add active class to selected topic
+      element.classList.add('active');
+      currentTopic = topic;
+      
+      // Clear chat messages
+      document.getElementById('chat-messages').innerHTML = '';
+      
+      // Add welcome message based on topic
+      let welcomeMessage = '';
+      switch(topic) {
+        case 'general':
+          welcomeMessage = '👋 Hello! Welcome to Soko freshi Support. How can I help you today?';
+          break;
+        case 'products':
+          welcomeMessage = '👋 Welcome to Product Support. Having issues with your products?';
+          break;
+        case 'orders':
+          welcomeMessage = '👋 Welcome to Order Management Support. How can I help with your orders?';
+          break;
+        case 'payments':
+          welcomeMessage = '👋 Welcome to Payment Support. Having issues with payments?';
+          break;
+        case 'technical':
+          welcomeMessage = '👋 Welcome to Technical Support. Experiencing technical issues?';
+          break;
+      }
+      
+      addMessage(welcomeMessage, 'received');
+    }
+    
+    function sendMessage() {
+      const input = document.getElementById('message-input');
+      const message = input.value.trim();
+      
+      if (message) {
+        addMessage(message, 'sent');
+        input.value = '';
+        
+        // Simulate response after a short delay
+        setTimeout(() => {
+          let response = '';
+          
+          if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
+            response = 'Hello! How can I assist you today?';
+          } else if (message.toLowerCase().includes('product')) {
+            response = 'For product-related issues, please provide the product name or ID, and describe the problem you\'re experiencing.';
+          } else if (message.toLowerCase().includes('order')) {
+            response = 'For order-related inquiries, please provide your order number so I can look it up for you.';
+          } else if (message.toLowerCase().includes('payment')) {
+            response = 'For payment issues, please let me know what specific problem you\'re experiencing, and I\'ll guide you through the resolution process.';
+          } else {
+            response = 'Thank you for your message. Our support team will review it and get back to you shortly. Is there anything else I can help you with?';
+          }
+          
+          addMessage(response, 'received');
+        }, 1000);
+      }
+    }
+    
+    function addMessage(text, type) {
+      const chatMessages = document.getElementById('chat-messages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${type}`;
+      
+      const now = new Date();
+      const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                         now.getMinutes().toString().padStart(2, '0');
+      
+      messageDiv.innerHTML = `
+        <div class="message-content">${text}</div>
+        <div class="message-time">${timeString}</div>
+      `;
+      
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+    
+    // Logout button
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      firebase.auth().signOut().then(() => {
+        window.location.href = 'index.html';
+      });
+    });
+  </script>
+</body>
+</html>

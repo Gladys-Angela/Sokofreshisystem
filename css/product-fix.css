@@ -1,0 +1,27 @@
+.product-box {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px;
+}
+
+.product-box img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.product-buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.product-box .cart-btn,
+.product-box .like-btn {
+  margin-top: 5px;
+}

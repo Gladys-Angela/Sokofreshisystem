@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Products - Soko freshi Store</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <style>
+    .admin-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .admin-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0dd134;
+    }
+    .admin-button {
+      background-color: #0dd134;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 20px auto;
+    }
+    .admin-button:hover {
+      background-color: #0bb12c;
+    }
+    .status-box {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="admin.html">Admin Dashboard</a></li>
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </nav>
+
+  <div class="admin-container">
+    <h1 class="admin-title">Update Products</h1>
+    
+    <p>This tool will add the visibility field to all products in the database. This is required for proper product filtering.</p>
+    
+    <button id="update-products-btn" class="admin-button">
+      <i class="fas fa-sync"></i> Update All Products
+    </button>
+    
+    <div class="status-box">
+      <p>Status: <span id="status">Ready to update</span></p>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/add-visibility-to-products.js"></script>
+  
+  <script>
+    // Check if user is admin
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in, check if admin
+        firebase.firestore().collection('users').doc(user.uid).get()
+          .then((doc) => {
+            if (doc.exists && doc.data().role === 'admin') {
+              // User is admin, allow access
+              document.getElementById('status').textContent = 'Ready to update (Admin logged in)';
+            } else {
+              // Not admin, redirect
+              alert('Only admins can access this page');
+              window.location.href = 'index.html';
+            }
+          })
+          .catch((error) => {
+            console.error('Error checking admin status:', error);
+            alert('Error checking permissions');
+          });
+      } else {
+        // No user is signed in, redirect to login
+        alert('Please log in as admin to access this page');
+        window.location.href = 'login.html';
+      }
+    });
+  </script>
+</body>
+</html>

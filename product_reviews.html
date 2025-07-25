@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Product Reviews</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <style>
+    .reviews-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .product-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .product-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-right: 20px;
+    }
+    .product-details {
+      flex: 1;
+    }
+    .product-name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .product-price {
+      color: #0dd134;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    .product-rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .stars {
+      color: #ffc107;
+      margin-right: 10px;
+    }
+    .rating-count {
+      color: #666;
+      font-size: 14px;
+    }
+    .review-form {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .form-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .form-group textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    .star-rating {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .star-rating i {
+      font-size: 24px;
+      color: #ddd;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    .star-rating i.active {
+      color: #ffc107;
+    }
+    .submit-btn {
+      background-color: #0dd134;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #0bb12d;
+    }
+    .reviews-list {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .review-item {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    .review-item:last-child {
+      border-bottom: none;
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .reviewer-name {
+      font-weight: bold;
+    }
+    .review-date {
+      color: #666;
+      font-size: 14px;
+    }
+    .review-rating {
+      margin-bottom: 10px;
+    }
+    .review-title {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    .review-content {
+      color: #333;
+      line-height: 1.5;
+    }
+    .no-reviews {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+    .verified-badge {
+      background-color: #d4edda;
+      color: #155724;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navigation">
+    <a href="customer_dashboard.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="customer_dashboard.html">Dashboard</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="my_orders.html">My Orders</a></li>
+    </ul>
+    <div class="right-nav">
+      <a href="#" class="like">
+        <i class="far fa-heart"></i>
+        <span>0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span>0</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+
+  <section id="popular-product">
+    <div class="product-heading">
+      <h3>Product Reviews</h3>
+      <span></span>
+    </div>
+    
+    <div class="reviews-container">
+      <div class="product-info" id="product-info">
+        <!-- Product info will be loaded here -->
+        <img src="images/apple.jpg" alt="Apple" class="product-image" id="product-image">
+        <div class="product-details">
+          <div class="product-name" id="product-name">Apple</div>
+          <div class="product-price" id="product-price">Ksh150</div>
+          <div class="product-rating">
+            <div class="stars" id="product-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="rating-count" id="rating-count">4.5 (10 reviews)</div>
+          </div>
+          <a href="product_details.html" class="btn" id="view-product-btn">View Product</a>
+        </div>
+      </div>
+      
+      <div class="review-form" id="review-form">
+        <div class="form-title">Write a Review</div>
+        <form id="submit-review-form">
+          <div class="form-group">
+            <label for="review-title">Review Title:</label>
+            <input type="text" id="review-title" required placeholder="Summarize your experience">
+          </div>
+          <div class="form-group">
+            <label>Rating:</label>
+            <div class="star-rating" id="star-rating">
+              <i class="fas fa-star" data-rating="1"></i>
+              <i class="fas fa-star" data-rating="2"></i>
+              <i class="fas fa-star" data-rating="3"></i>
+              <i class="fas fa-star" data-rating="4"></i>
+              <i class="fas fa-star" data-rating="5"></i>
+            </div>
+            <input type="hidden" id="rating-value" value="0" required>
+          </div>
+          <div class="form-group">
+            <label for="review-content">Your Review:</label>
+            <textarea id="review-content" required placeholder="Share your thoughts about this product"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Submit Review</button>
+        </form>
+      </div>
+      
+      <div class="reviews-list" id="reviews-list">
+        <!-- Reviews will be loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="#">Soko freshi</a>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <strong>Quick Links</strong>
+        <ul>
+          <li><a href="customer_dashboard.html">Dashboard</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="my_orders.html">My Orders</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Categories</strong>
+        <ul>
+          <li><a href="products.html?category=Fruits">Fruits</a></li>
+          <li><a href="products.html?category=Vegetables">Vegetables</a></li>
+          <li><a href="products.html?category=Fish & Meat">Fish & Meat</a></li>
+          <li><a href="products.html?category=Spices">Spices</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Contact Us</strong>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> 123, ABC Street, XYZ City</li>
+          <li><i class="fas fa-phone-alt"></i> +254 758 599393</li>
+          <li><i class="fas fa-envelope"></i> angie@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.firebasestorage.app",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    
+    // Get product ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    
+    // DOM elements
+    const productImage = document.getElementById('product-image');
+    const productName = document.getElementById('product-name');
+    const productPrice = document.getElementById('product-price');
+    const productStars = document.getElementById('product-stars');
+    const ratingCount = document.getElementById('rating-count');
+    const viewProductBtn = document.getElementById('view-product-btn');
+    const reviewForm = document.getElementById('review-form');
+    const submitReviewForm = document.getElementById('submit-review-form');
+    const starRating = document.getElementById('star-rating');
+    const ratingValue = document.getElementById('rating-value');
+    const reviewsList = document.getElementById('reviews-list');
+    
+    // Check if user is logged in
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        // User is logged in
+        try {
+          // Get user data
+          const userDoc = await db.collection('users').doc(user.uid).get();
+          if (userDoc.exists) {
+            const userData = userDoc.data();
+            
+            // Check if user is a customer
+            if (userData.role && userData.role !== 'customer') {
+              alert('This page is for customers only.');
+              window.location.href = 'index.html';
+              return;
+            }
+          }
+          
+          // Load product details
+          if (productId) {
+            loadProductDetails(productId, user.uid);
+          } else {
+            alert('No product selected. Redirecting to products page.');
+            window.location.href = 'products.html';
+          }
+          
+        } catch (error) {
+          console.error("Error loading product:", error);
+          alert('Error loading product details. Please try again.');
+        }
+      } else {
+        // Not logged in, redirect to login
+        window.location.href = 'login.html';
+      }
+    });
+    
+    // Load product details
+    async function loadProductDetails(productId, userId) {
+      try {
+        // Get product from Firestore
+        const productDoc = await db.collection('products').doc(productId).get();
+        
+        if (!productDoc.exists) {
+          alert('Product not found. Redirecting to products page.');
+          window.location.href = 'products.html';
+          return;
+        }
+        
+        const product = productDoc.data();
+        
+        // Update product info
+        productImage.src = product.imageUrl || 'images/default-product.jpg';
+        productName.textContent = product.name;
+        productPrice.textContent = `Ksh${product.price}`;
+        viewProductBtn.href = `product_details.html?id=${productId}`;
+        
+        // Load reviews
+        loadReviews(productId, userId);
+        
+      } catch (error) {
+        console.error("Error loading product details:", error);
+        alert('Error loading product details. Please try again.');
+      }
+    }
+    
+    // Load reviews
+    async function loadReviews(productId, userId) {
+      try {
+        // Get reviews from Firestore
+        const reviewsQuery = await db.collection('reviews')
+          .where('productId', '==', productId)
+          .orderBy('createdAt', 'desc')
+          .get();
+        
+        // Check if user has already reviewed this product
+        const userReviewQuery = await db.collection('reviews')
+          .where('productId', '==', productId)
+          .where('userId', '==', userId)
+          .get();
+        
+        const hasReviewed = !userReviewQuery.empty;
+        
+        // Hide review form if user has already reviewed
+        if (hasReviewed) {
+          reviewForm.innerHTML = '<p>You have already reviewed this product.</p>';
+        } else {
+          // Set up star rating
+          setupStarRating();
+        }
+        
+        // Process reviews
+        if (reviewsQuery.empty) {
+          reviewsList.innerHTML = '<div class="no-reviews">No reviews yet. Be the first to review this product!</div>';
+          ratingCount.textContent = '0.0 (0 reviews)';
+          updateStars(0);
+          return;
+        }
+        
+        const reviews = [];
+        reviewsQuery.forEach(doc => {
+          reviews.push({
+            id: doc.id,
+            ...doc.data()
+          });
+        });
+        
+        // Calculate average rating
+        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+        const averageRating = totalRating / reviews.length;
+        
+        // Update rating display
+        ratingCount.textContent = `${averageRating.toFixed(1)} (${reviews.length} reviews)`;
+        updateStars(averageRating);
+        
+        // Display reviews
+        displayReviews(reviews);
+        
+      } catch (error) {
+        console.error("Error loading reviews:", error);
+        reviewsList.innerHTML = '<div class="no-reviews">Error loading reviews. Please try again later.</div>';
+      }
+    }
+    
+    // Display reviews
+    function displayReviews(reviews) {
+      reviewsList.innerHTML = '';
+      
+      reviews.forEach(review => {
+        const reviewDate = review.createdAt ? new Date(review.createdAt.toDate()).toLocaleDateString() : 'Unknown date';
+        
+        // Generate stars HTML
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+          if (i <= review.rating) {
+            starsHtml += '<i class="fas fa-star"></i>';
+          } else {
+            starsHtml += '<i class="far fa-star"></i>';
+          }
+        }
+        
+        // Check if verified purchase
+        const verifiedBadge = review.verified ? 
+          '<span class="verified-badge">Verified Purchase</span>' : '';
+        
+        const reviewItem = document.createElement('div');
+        reviewItem.className = 'review-item';
+        reviewItem.innerHTML = `
+          <div class="review-header">
+            <div class="reviewer-name">${review.userName || 'Anonymous'} ${verifiedBadge}</div>
+            <div class="review-date">${reviewDate}</div>
+          </div>
+          <div class="review-rating">
+            ${starsHtml}
+          </div>
+          <div class="review-title">${review.title || ''}</div>
+          <div class="review-content">${review.content}</div>
+        `;
+        
+        reviewsList.appendChild(reviewItem);
+      });
+    }
+    
+    // Set up star rating
+    function setupStarRating() {
+      const stars = starRating.querySelectorAll('i');
+      
+      stars.forEach(star => {
+        star.addEventListener('mouseover', function() {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          highlightStars(rating);
+        });
+        
+        star.addEventListener('mouseout', function() {
+          const currentRating = parseInt(ratingValue.value);
+          highlightStars(currentRating);
+        });
+        
+        star.addEventListener('click', function() {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          ratingValue.value = rating;
+          highlightStars(rating);
+        });
+      });
+    }
+    
+    // Highlight stars
+    function highlightStars(rating) {
+      const stars = starRating.querySelectorAll('i');
+      
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    }
+    
+    // Update product stars
+    function updateStars(rating) {
+      productStars.innerHTML = '';
+      
+      // Add full stars
+      const fullStars = Math.floor(rating);
+      for (let i = 0; i < fullStars; i++) {
+        productStars.innerHTML += '<i class="fas fa-star"></i>';
+      }
+      
+      // Add half star if needed
+      if (rating % 1 >= 0.5) {
+        productStars.innerHTML += '<i class="fas fa-star-half-alt"></i>';
+      }
+      
+      // Add empty stars
+      const emptyStars = 5 - Math.ceil(rating);
+      for (let i = 0; i < emptyStars; i++) {
+        productStars.innerHTML += '<i class="far fa-star"></i>';
+      }
+    }
+    
+    // Submit review
+    submitReviewForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const user = auth.currentUser;
+      if (!user) {
+        alert('You must be logged in to submit a review.');
+        return;
+      }
+      
+      const title = document.getElementById('review-title').value;
+      const content = document.getElementById('review-content').value;
+      const rating = parseInt(ratingValue.value);
+      
+      if (rating === 0) {
+        alert('Please select a rating.');
+        return;
+      }
+      
+      try {
+        // Get user name
+        const userDoc = await db.collection('users').doc(user.uid).get();
+        let userName = 'Anonymous';
+        if (userDoc.exists) {
+          const userData = userDoc.data();
+          userName = userData.fullName || userData.storeName || user.email.split('@')[0];
+        }
+        
+        // Check if user has purchased this product
+        const ordersQuery = await db.collection('orders')
+          .where('userId', '==', user.uid)
+          .get();
+        
+        let verified = false;
+        
+        if (!ordersQuery.empty) {
+          // Check if any order contains this product
+          ordersQuery.forEach(doc => {
+            const order = doc.data();
+            if (order.items && order.items.some(item => item.productId === productId)) {
+              verified = true;
+            }
+          });
+        }
+        
+        // Save review to Firestore
+        await db.collection('reviews').add({
+          productId: productId,
+          userId: user.uid,
+          userName: userName,
+          title: title,
+          content: content,
+          rating: rating,
+          verified: verified,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        
+        alert('Review submitted successfully!');
+        location.reload(); // Reload to show the new review
+        
+      } catch (error) {
+        console.error("Error submitting review:", error);
+        alert('Error submitting review. Please try again.');
+      }
+    });
+    
+    // Logout functionality
+    const logoutBtn = document.getElementById('logout-btn');
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      auth.signOut().then(() => {
+        window.location.href = 'login.html';
+      }).catch((error) => {
+        alert(error.message);
+      });
+    });
+  </script>
+</body>
+</html>

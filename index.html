@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Fresh Groceries Delivered</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/modern-nav.css" />
+  <link rel="stylesheet" type="text/css" href="css/modern-home.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/newsletter.css" />
+  <link rel="stylesheet" type="text/css" href="css/language-selector.css" />
+  <link rel="stylesheet" type="text/css" href="css/chatbot.css" />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="index.html" class="active" data-translate="home">Home</a></li>
+      <li><a href="products.html" data-translate="products">Products</a></li>
+      <li><a href="about.html" data-translate="about">About Us</a></li>
+    </ul>
+    <div class="right-nav" id="guest-nav">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart-direct.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+      <a href="login.html" class="login">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span data-translate="login">Login</span>
+      </a>
+      <a href="register.html" class="register">
+        <i class="fa-solid fa-user-plus"></i>
+        <span data-translate="register">Register</span>
+      </a>
+    </div>
+    <div class="right-nav" id="user-nav" style="display: none;">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count-user">0</span>
+      </a>
+      <a href="cart-direct.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count-user">0</span>
+      </a>
+      <a href="my_orders.html" class="orders-link">
+        <i class="fas fa-box"></i>
+        <span>My Orders</span>
+      </a>
+      <a href="#" class="dashboard-link">
+        <i class="fas fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span data-translate="logout">Logout</span>
+      </a>
+    </div>
+  </nav>
+  <div class="language-selector-container">
+    <select id="language-selector">
+      <option value="en" data-translate="english">English</option>
+      <option value="sw" data-translate="swahili">Swahili</option>
+    </select>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="search-banner">
+    <img src="images/tomato.png" class="bg-1" alt="bg">
+    <img src="images/salad.png" class="bg-2" alt="bg-2">
+
+    <div class="search-banner-text">
+      <h1 data-translate="main_title">Fresh Groceries Delivered to Your Doorstep</h1>
+      <strong data-translate="sub_title">Fast, Fresh, and Convenient</strong>
+      <a href="products.html" class="btn" id="shop-now-btn" data-translate="shop_now">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section id="category">
+    <div class="category-heading">
+      <h2 data-translate="categories">Categories</h2>
+    </div>
+    <div class="category-container">
+      <a href="products.html?category=Vegetables" class="category-box">
+        <img src="images/vegetable.png" alt="Vegetables">
+        <span data-translate="vegetables">Vegetables</span>
+      </a>
+      <a href="products.html?category=Fruits" class="category-box">
+        <img src="images/apple.jpg" alt="Fruits">
+        <span data-translate="fruits">Fruits</span>
+      </a>
+      <a href="products.html?category=Fish & Meat" class="category-box">
+        <img src="images/fish.png" alt="Fish">
+        <span data-translate="fish_meat">Fish & Meat</span>
+      </a>
+      <a href="products.html?category=Spices" class="category-box">
+        <img src="images/spices.jpeg" alt="Spices">
+        <span data-translate="spices">Spices</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section id="popular-product">
+    <div class="product-heading">
+      <h3 data-translate="featured_products">Featured Products</h3>
+      <span>Fresh products from our vendors</span>
+    </div>
+    <div class="product-container" id="featured-products">
+      <!-- Products will be loaded here dynamically -->
+      <!-- Products will be loaded dynamically from admin-managed products -->
+    </div>
+  </section>
+  
+  <!-- Load shared products script -->
+  <script src="js/shared-products.js"></script>
+
+  <!-- Why Choose Us -->
+  <section id="why-choose-us">
+    <div class="product-heading">
+      <h3 data-translate="why_choose_us">Why Choose Us</h3>
+    </div>
+    <div class="why-choose-us-container">
+      <div class="why-choose-us-box">
+        <i class="fa-solid fa-truck-fast"></i>
+        <h4 data-translate="fast_delivery">Fast Delivery</h4>
+        <p data-translate="fast_delivery_text">Get your groceries delivered to your doorstep in no time.</p>
+      </div>
+      <div class="why-choose-us-box">
+        <i class="fa-solid fa-seedling"></i>
+        <h4 data-translate="fresh_products">Fresh Products</h4>
+        <p data-translate="fresh_products_text">We source the freshest products from local farms.</p>
+      </div>
+      <div class="why-choose-us-box">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h4 data-translate="secure_payments">Secure Payments</h4>
+        <p data-translate="secure_payments_text">Shop with confidence with our secure payment options.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download App -->
+  <section id="download-app">
+    <div class="app-img">
+      <img src="images/mobile-app.png" alt="app">
+    </div>
+    <div class="download-app-text">
+      <strong data-translate="download_app">Download App</strong>
+      <p>
+        <b data-translate="download_app_text">We have everything from fresh fruits and vegetables to frozen foods. Shopping made easy. Buy Groceries now.</b>
+      </p>
+      <div class="download-btns">
+        <a href="#">
+          <img src="images/appstore-btn.png" alt="App Store">
+        </a>
+        <a href="#">
+          <img src="images/googleplay-btn.png" alt="Google Play">
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Newsletter Section -->
+  <section id="newsletter-section">
+    <div class="newsletter-container">
+      <div class="newsletter-title">New to Soko freshi?</div>
+      <div class="newsletter-subtitle">Subscribe to our newsletter to get updates on our latest offers!</div>
+      
+      <form id="newsletter-form" class="newsletter-form">
+        <div class="newsletter-form-row">
+          <input type="email" id="newsletter-email" class="newsletter-input" placeholder="Enter E-mail Address" required>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </div>
+        
+        <div class="newsletter-checkbox">
+          <input type="checkbox" id="newsletter-terms-checkbox" required>
+          <label for="newsletter-terms-checkbox">
+            I agree to Soko freshi's <a href="#">Privacy</a> and <a href="#">Cookie Policy</a>. You can unsubscribe from newsletters at any time.
+          </label>
+        </div>
+        
+        <div id="newsletter-success" class="newsletter-message newsletter-success">
+          Thank you for subscribing to our newsletter!
+        </div>
+        <div id="newsletter-error" class="newsletter-message newsletter-error"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="#">Soko freshi</a>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <strong data-translate="quick_links">Quick Links</strong>
+        <ul>
+          <li><a href="index.html" data-translate="home">Home</a></li>
+          <li><a href="products.html" data-translate="products">Products</a></li>
+          <li><a href="about.html" data-translate="about">About Us</a></li>
+          <li><a href="contact.html" data-translate="contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Categories</strong>
+        <ul>
+          <li><a href="products.html?category=Fruits">Fruits</a></li>
+          <li><a href="products.html?category=Vegetables">Vegetables</a></li>
+          <li><a href="products.html?category=Fish & Meat">Fish & Meat</a></li>
+          <li><a href="products.html?category=Spices">Spices</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong data-translate="contact_us">Contact Us</strong>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+          <li><i class="fas fa-phone-alt"></i> +254 758 599393</li>
+          <li><i class="fas fa-envelope"></i> angie@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <!-- Firebase SDKs - Using a more stable version -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.appspot.com",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  </script>
+  <script src="js/migrate-user-roles.js"></script>
+  <script src="js/hide-nav-links.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/universal-translate.js"></script>
+  <script src="js/register-admin.js"></script>
+  <script src="js/display-products.js"></script>
+  <script src="js/soko-freshi-chatbot.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Update cart count
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        document.querySelectorAll('.cart span').forEach(span => {
+          span.textContent = totalItems;
+        });
+      }
+      
+      // Update wishlist count
+      function updateWishlistCount() {
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        
+        document.querySelectorAll('#wishlist-count, #wishlist-count-user').forEach(span => {
+          span.textContent = wishlist.length;
+        });
+      }
+      
+      // Add to cart functionality
+      document.querySelectorAll('.cart-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const productBox = this.closest('.product-box');
+          const productId = this.getAttribute('data-product-id');
+          const productName = productBox.querySelector('strong').textContent;
+          const productPrice = productBox.querySelector('.price').textContent.replace('Ksh', '');
+          const productImage = productBox.querySelector('img').src;
+          
+          // Add to cart
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          
+          // Check if product already in cart
+          const existingItem = cart.find(item => item.id === productId);
+          
+          if (existingItem) {
+            // Increase quantity
+            existingItem.quantity += 1;
+          } else {
+            // Add new item
+            cart.push({
+              id: productId,
+              name: productName,
+              price: productPrice,
+              image: productImage,
+              quantity: 1
+            });
+          }
+          
+          // Save cart back to localStorage
+          localStorage.setItem('cart', JSON.stringify(cart));
+          
+          // Update cart count
+          updateCartCount();
+          
+          // Show confirmation
+          alert(`${productName} added to cart!`);
+        });
+      });
+      
+      // Dashboard link functionality
+      const dashboardLink = document.querySelector('.dashboard-link');
+      if (dashboardLink) {
+        dashboardLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const userRole = localStorage.getItem('userRole');
+          
+          if (userRole === 'vendor') {
+            window.location.href = 'vendor_dashboard.html';
+          } else {
+            window.location.href = 'customer_dashboard.html';
+          }
+        });
+      }
+      
+      // Logout functionality
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          firebase.auth().signOut().then(() => {
+            // Clear login state
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('roleMigrationRun');
+            
+            // Reload page
+            window.location.reload();
+          }).catch((error) => {
+            console.error('Error signing out:', error);
+          });
+        });
+      }
+      
+      // Initialize counts
+      updateCartCount();
+      updateWishlistCount();
+    });
+  </script>
+</body>
+</html>

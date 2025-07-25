@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Methods | Soko freshi Groceries</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .page-header {
+      background: linear-gradient(135deg, #00b761, #00a055);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    
+    .page-header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .content-section {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #333;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: #00b761;
+      border-radius: 3px;
+    }
+    
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .payment-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .payment-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .payment-icon {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .payment-icon i {
+      font-size: 2rem;
+      color: #00b761;
+    }
+    
+    .payment-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .payment-description {
+      color: #555;
+      font-size: 0.95rem;
+    }
+    
+    .steps-container {
+      margin-bottom: 30px;
+    }
+    
+    .step-card {
+      display: flex;
+      margin-bottom: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .step-card:hover {
+      transform: translateY(-3px);
+    }
+    
+    .step-number {
+      background: #00b761;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 20px;
+    }
+    
+    .step-content {
+      padding: 15px 20px;
+      flex: 1;
+    }
+    
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .step-description {
+      color: #555;
+      font-size: 0.95rem;
+    }
+    
+    .security-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .security-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #eee;
+    }
+    
+    .security-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .security-icon {
+      width: 50px;
+      height: 50px;
+      background: #e8f5e9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      color: #00b761;
+      font-size: 1.5rem;
+    }
+    
+    .security-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .security-description {
+      color: #555;
+      font-size: 0.95rem;
+    }
+    
+    .faq-section {
+      margin-bottom: 30px;
+    }
+    
+    .faq-item {
+      margin-bottom: 15px;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .faq-question {
+      padding: 15px 20px;
+      background: #f8f9fa;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-question::after {
+      content: '\f107';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-question::after {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    
+    .faq-item.active .faq-answer {
+      padding: 15px 20px;
+      max-height: 500px;
+    }
+    
+    .cta-section {
+      background: linear-gradient(135deg, #00b761, #00a055);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .cta-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    .cta-description {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .btn-white {
+      background: white;
+      color: #00b761;
+    }
+    
+    .btn-white:hover {
+      background: #f5f5f5;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .payment-methods,
+      .security-features {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .step-card {
+        flex-direction: column;
+      }
+      
+      .step-number {
+        padding: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    
+    <div class="right-nav">
+      <a href="cart.html" class="cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="customer_dashboard.html" class="profile">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Payment Methods</h1>
+      <p>Secure and convenient ways to pay for your groceries</p>
+    </div>
+    
+    <div class="content-section">
+      <h2 class="section-title">Available Payment Options</h2>
+      
+      <div class="payment-methods">
+        <div class="payment-card">
+          <div class="payment-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <div class="payment-title">M-Pesa</div>
+          <div class="payment-description">
+            <p>Pay directly from your M-Pesa account. Fast, secure, and convenient mobile payment.</p>
+          </div>
+        </div>
+        
+        <div class="payment-card">
+          <div class="payment-icon">
+            <i class="fas fa-credit-card"></i>
+          </div>
+          <div class="payment-title">Credit/Debit Cards</div>
+          <div class="payment-description">
+            <p>We accept Visa, Mastercard, and American Express cards for secure online payments.</p>
+          </div>
+        </div>
+        
+        <div class="payment-card">
+          <div class="payment-icon">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <div class="payment-title">Cash on Delivery</div>
+          <div class="payment-description">
+            <p>Pay with cash when your order is delivered to your doorstep. Available in select areas.</p>
+          </div>
+        </div>
+        
+        <div class="payment-card">
+          <div class="payment-icon">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="payment-title">Bank Transfer</div>
+          <div class="payment-description">
+            <p>Make a direct bank transfer to our account. Order processing begins after payment confirmation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2 class="section-title">How to Pay</h2>
+      
+      <div class="steps-container">
+        <h3 style="margin-bottom: 20px; font-size: 1.2rem; color: #333;">M-Pesa Payment</h3>
+        
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Select M-Pesa at Checkout</div>
+            <div class="step-description">
+              <p>Choose M-Pesa as your payment method when completing your order at checkout.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Enter Your Phone Number</div>
+            <div class="step-description">
+              <p>Enter the M-Pesa registered phone number where you want to receive the payment request.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Confirm Payment Request</div>
+            <div class="step-description">
+              <p>You'll receive an STK push notification on your phone. Enter your M-Pesa PIN to authorize the payment.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <div class="step-title">Payment Confirmation</div>
+            <div class="step-description">
+              <p>Once the payment is successful, you'll receive a confirmation message and your order will be processed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="steps-container">
+        <h3 style="margin: 30px 0 20px; font-size: 1.2rem; color: #333;">Credit/Debit Card Payment</h3>
+        
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Select Card Payment at Checkout</div>
+            <div class="step-description">
+              <p>Choose Credit/Debit Card as your payment method when completing your order.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Enter Card Details</div>
+            <div class="step-description">
+              <p>Enter your card number, expiration date, CVV, and cardholder name in our secure payment gateway.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Verify Payment</div>
+            <div class="step-description">
+              <p>You may be redirected to your bank's 3D Secure verification page to complete the payment authentication.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <div class="step-title">Payment Confirmation</div>
+            <div class="step-description">
+              <p>Once the payment is successful, you'll be redirected back to our website and receive a confirmation email.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2 class="section-title">Payment Security</h2>
+      
+      <div class="security-features">
+        <div class="security-card">
+          <div class="security-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="security-title">SSL Encryption</div>
+          <div class="security-description">
+            <p>All payment information is encrypted using 256-bit SSL technology to ensure your data remains private and secure.</p>
+          </div>
+        </div>
+        
+        <div class="security-card">
+          <div class="security-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="security-title">PCI DSS Compliant</div>
+          <div class="security-description">
+            <p>We adhere to Payment Card Industry Data Security Standards to protect your card information.</p>
+          </div>
+        </div>
+        
+        <div class="security-card">
+          <div class="security-icon">
+            <i class="fas fa-fingerprint"></i>
+          </div>
+          <div class="security-title">3D Secure</div>
+          <div class="security-description">
+            <p>Additional security layer for card payments that verifies your identity with your card issuer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <p style="margin-top: 20px;">At Soko freshi, we take your payment security seriously. We never store your complete credit card information on our servers. All payment processing is handled by trusted, industry-leading payment processors that maintain the highest security standards.</p>
+    </div>
+    
+    <div class="content-section">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-section">
+        <div class="faq-item">
+          <div class="faq-question">When will my card be charged?</div>
+          <div class="faq-answer">
+            <p>Your card will be charged immediately after you place your order. If for any reason we cannot fulfill your order, a full refund will be processed to your original payment method.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Is it safe to save my card details for future purchases?</div>
+          <div class="faq-answer">
+            <p>Yes, it's safe to save your card details for future purchases. We use tokenization technology, which means your actual card details are not stored on our servers. Instead, a secure token is created and stored, which cannot be used to make purchases outside of our platform.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">What happens if my M-Pesa payment fails?</div>
+          <div class="faq-answer">
+            <p>If your M-Pesa payment fails, you'll receive a notification with the reason for the failure. You can try again or choose a different payment method. Common reasons for failure include insufficient funds, wrong PIN, or transaction limits.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Can I change my payment method after placing an order?</div>
+          <div class="faq-answer">
+            <p>Once an order is placed, you cannot change the payment method through the website. However, you can contact our customer service team within 30 minutes of placing your order, and they may be able to assist you with changing the payment method if the order has not yet been processed.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Do you charge any additional fees for specific payment methods?</div>
+          <div class="faq-answer">
+            <p>No, we don't charge any additional fees for any payment method. The price you see at checkout is the final price you'll pay, regardless of which payment method you choose.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cta-section">
+      <h2 class="cta-title">Ready to shop?</h2>
+      <p class="cta-description">Browse our fresh selection of groceries and enjoy secure, hassle-free payments.</p>
+      <a href="products.html" class="btn btn-white">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <a href="index.html">Soko freshi</a>
+          <p>Your trusted platform for fresh groceries and quality products.</p>
+        </div>
+        
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="orders.html"><i class="fas fa-box"></i> Orders</a></li>
+            <li><a href="delivery.html"><i class="fas fa-truck"></i> Delivery</a></li>
+            <li><a href="returns.html"><i class="fas fa-undo"></i> Returns</a></li>
+            <li><a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="help_center.html">Help Center</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Soko freshi Groceries. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ accordion functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        faqItem.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

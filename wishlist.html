@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - My Wishlist</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="css/chatbot.css" />
+  <link rel="stylesheet" type="text/css" href="css/contact-widget.css" />
+  <style>
+    .wishlist-empty {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    
+    .wishlist-empty i {
+      font-size: 60px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+    
+    .wishlist-empty h3 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    
+    .wishlist-empty p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    
+    .wishlist-empty .btn {
+      display: inline-block;
+      padding: 10px 20px;
+    }
+    
+    .remove-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #ff6c57;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .remove-btn:hover {
+      background-color: #ff4c33;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="customer_dashboard.html">Dashboard</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="my_orders.html">My Orders</a></li>
+    </ul>
+    <div class="right-nav" id="guest-nav">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+      <a href="login_redirect.html" class="login">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span>Login</span>
+      </a>
+      <a href="register_redirect.html" class="register">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Register</span>
+      </a>
+    </div>
+    <div class="right-nav" id="user-nav" style="display: none;">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count-user">0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count-user">0</span>
+      </a>
+      <a href="my_orders.html" class="my-orders">
+        <i class="fas fa-receipt"></i>
+        <span>My Orders</span>
+      </a>
+      <a href="customer_dashboard.html" class="dashboard">
+        <i class="fas fa-user"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Wishlist Section -->
+  <section id="wishlist-section">
+    <div class="product-heading">
+      <h3>My Wishlist</h3>
+      <span></span>
+    </div>
+    
+    <div class="product-container" id="wishlist-container">
+      <!-- Wishlist items will be loaded here dynamically -->
+    </div>
+    
+    <div class="wishlist-empty" id="empty-wishlist" style="display: none;">
+      <i class="far fa-heart"></i>
+      <h3>Your wishlist is empty</h3>
+      <p>Add items to your wishlist to save them for later.</p>
+      <a href="products.html" class="btn">Browse Products</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="#">Soko freshi</a>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <strong>Quick Links</strong>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Categories</strong>
+        <ul>
+          <li><a href="products.html?category=Fruits">Fruits</a></li>
+          <li><a href="products.html?category=Vegetables">Vegetables</a></li>
+          <li><a href="products.html?category=Fish & Meat">Fish & Meat</a></li>
+          <li><a href="products.html?category=Spices">Spices</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Contact Us</strong>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> 123, ABC Street, XYZ City</li>
+          <li><i class="fas fa-phone-alt"></i> +254 758 599393</li>
+          <li><i class="fas fa-envelope"></i> angie@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/translate.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/contact-widget.js"></script>
+  <script src="js/wishlist.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/navigation.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load wishlist items
+      const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      const wishlistContainer = document.getElementById('wishlist-container');
+      const emptyWishlist = document.getElementById('empty-wishlist');
+      
+      if (wishlist.length === 0) {
+        emptyWishlist.style.display = 'block';
+        wishlistContainer.style.display = 'none';
+      } else {
+        emptyWishlist.style.display = 'none';
+        wishlistContainer.style.display = 'grid';
+        
+        // Clear container
+        wishlistContainer.innerHTML = '';
+        
+        // Add each wishlist item
+        wishlist.forEach(item => {
+          const productBox = document.createElement('div');
+          productBox.className = 'product-box';
+          productBox.dataset.id = item.id;
+          
+          productBox.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <strong>${item.name}</strong>
+            <span class="price">${item.price}</span>
+            <a href="#" class="cart-btn">
+              <i class="fas fa-shopping-bag"></i> <span>Add to Cart</span>
+            </a>
+            <button class="remove-btn" data-id="${item.id}">
+              <i class="fas fa-times"></i>
+            </button>
+          `;
+          
+          wishlistContainer.appendChild(productBox);
+        });
+        
+        // Add event listeners to remove buttons
+        document.querySelectorAll('.remove-btn').forEach(button => {
+          button.addEventListener('click', function() {
+            const productId = this.dataset.id;
+            removeFromWishlist(productId);
+          });
+        });
+      }
+      
+      // Function to remove item from wishlist
+      function removeFromWishlist(productId) {
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        wishlist = wishlist.filter(item => item.id !== productId);
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        
+        // Update UI
+        const productBox = document.querySelector(`.product-box[data-id="${productId}"]`);
+        if (productBox) {
+          productBox.style.opacity = '0';
+          setTimeout(() => {
+            productBox.remove();
+            
+            // Check if wishlist is empty
+            if (wishlist.length === 0) {
+              emptyWishlist.style.display = 'block';
+              wishlistContainer.style.display = 'none';
+            }
+          }, 300);
+        }
+        
+        // Update wishlist count
+        updateWishlistCount();
+      }
+      
+      // Update wishlist count
+      function updateWishlistCount() {
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const wishlistCountElements = document.querySelectorAll('#wishlist-count, #wishlist-count-user');
+        wishlistCountElements.forEach(element => {
+          element.textContent = wishlist.length;
+        });
+      }
+      
+      // Update wishlist count on page load
+      updateWishlistCount();
+      
+      // Auth state change
+      auth.onAuthStateChanged((user) => {
+        const guestNav = document.getElementById('guest-nav');
+        const userNav = document.getElementById('user-nav');
+        if (user) {
+          guestNav.style.display = 'none';
+          userNav.style.display = 'flex';
+          
+          const logoutBtn = document.getElementById('logout-btn');
+          logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            auth.signOut().then(() => {
+              window.location.href = 'index.html';
+            }).catch((error) => {
+              alert(error.message);
+            });
+          });
+        } else {
+          guestNav.style.display = 'flex';
+          userNav.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

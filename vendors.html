@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Vendors</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.min.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .page-title {
+      text-align: center;
+      margin: 30px 0;
+      color: #333;
+    }
+    
+    .vendors-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+    }
+    
+    .vendor-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .vendor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    
+    .vendor-image {
+      height: 150px;
+      background-color: #ecf7ee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .vendor-image i {
+      font-size: 3rem;
+      color: #00b761;
+    }
+    
+    .vendor-details {
+      padding: 20px;
+    }
+    
+    .vendor-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .vendor-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      line-height: 1.4;
+      height: 60px;
+      overflow: hidden;
+    }
+    
+    .vendor-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 0.85rem;
+      color: #777;
+    }
+    
+    .vendor-meta div {
+      display: flex;
+      align-items: center;
+    }
+    
+    .vendor-meta i {
+      margin-right: 5px;
+      color: #00b761;
+    }
+    
+    .view-products-btn {
+      display: block;
+      background-color: #00b761;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    
+    .view-products-btn:hover {
+      background-color: #009d53;
+    }
+    
+    .no-vendors {
+      text-align: center;
+      padding: 50px 0;
+      color: #666;
+      grid-column: 1 / -1;
+    }
+    
+    .no-vendors i {
+      font-size: 3rem;
+      color: #ddd;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="vendors.html" class="active">Vendors</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <div class="right-nav" id="guest-nav">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span>0</span>
+      </a>
+      <a href="login_redirect.html" class="login">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span>Login</span>
+      </a>
+      <a href="register_redirect.html" class="register">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Register</span>
+      </a>
+    </div>
+    <div class="right-nav" id="user-nav" style="display: none;">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count-user">0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span>0</span>
+      </a>
+      <a href="my_orders.html" class="my-orders">
+        <i class="fas fa-receipt"></i>
+        <span>My Orders</span>
+      </a>
+      <a href="customer_dashboard.html" class="dashboard">
+        <i class="fas fa-user"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+
+  <h1 class="page-title">Our Vendors</h1>
+  
+  <div class="vendors-container" id="vendors-container">
+    <!-- Vendors will be loaded here -->
+    <div class="no-vendors">
+      <i class="fas fa-store"></i>
+      <h3>Loading vendors...</h3>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="#">Soko freshi</a>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <strong>Quick Links</strong>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Categories</strong>
+        <ul>
+          <li><a href="products.html?category=Fruits">Fruits</a></li>
+          <li><a href="products.html?category=Vegetables">Vegetables</a></li>
+          <li><a href="products.html?category=Fish & Meat">Fish & Meat</a></li>
+          <li><a href="products.html?category=Spices">Spices</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Contact Us</strong>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+          <li><i class="fas fa-phone-alt"></i> +254 758 599393</li>
+          <li><i class="fas fa-envelope"></i> angie@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/vendor.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/chatbot.css" />
+  <script src="js/chatbot.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check authentication status
+      firebase.auth().onAuthStateChanged(function(user) {
+        const guestNav = document.getElementById('guest-nav');
+        const userNav = document.getElementById('user-nav');
+        
+        if (user) {
+          // User is signed in
+          guestNav.style.display = 'none';
+          userNav.style.display = 'flex';
+          
+          // Set up logout button
+          document.getElementById('logout-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            firebase.auth().signOut().then(() => {
+              window.location.href = 'index.html';
+            }).catch((error) => {
+              alert(error.message);
+            });
+          });
+        } else {
+          // No user is signed in
+          guestNav.style.display = 'flex';
+          userNav.style.display = 'none';
+        }
+      });
+      
+      // Load all vendors
+      loadAllVendors();
+    });
+    
+    // Function to load all vendors
+    function loadAllVendors() {
+      const vendorsContainer = document.getElementById('vendors-container');
+      
+      // Get all vendors from Firestore
+      firebase.firestore().collection('users')
+        .where('role', '==', 'vendor')
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+            vendorsContainer.innerHTML = `
+              <div class="no-vendors">
+                <i class="fas fa-store-slash"></i>
+                <h3>No vendors found</h3>
+                <p>Check back later for new vendors</p>
+              </div>
+            `;
+            return;
+          }
+          
+          // Clear container
+          vendorsContainer.innerHTML = '';
+          
+          // Render each vendor
+          querySnapshot.forEach((doc) => {
+            const vendorData = doc.data();
+            const vendorCard = document.createElement('div');
+            vendorCard.className = 'vendor-card';
+            
+            // Get product count for this vendor
+            firebase.firestore().collection('products')
+              .where('vendorId', '==', doc.id)
+              .get()
+              .then((productsSnapshot) => {
+                const productCount = productsSnapshot.size;
+                
+                vendorCard.innerHTML = `
+                  <div class="vendor-image">
+                    <i class="fas fa-store"></i>
+                  </div>
+                  <div class="vendor-details">
+                    <h3 class="vendor-name">${vendorData.businessName || vendorData.displayName || 'Unnamed Vendor'}</h3>
+                    <p class="vendor-description">${vendorData.businessDescription || 'No description available.'}</p>
+                    <div class="vendor-meta">
+                      <div><i class="fas fa-box"></i> ${productCount} Products</div>
+                      <div><i class="fas fa-calendar-alt"></i> Joined ${formatDate(vendorData.createdAt)}</div>
+                    </div>
+                    <a href="products.html?vendor=${doc.id}" class="view-products-btn">View Products</a>
+                  </div>
+                `;
+                
+                vendorsContainer.appendChild(vendorCard);
+              })
+              .catch((error) => {
+                console.error('Error getting product count:', error);
+                
+                // Still render the vendor card without product count
+                vendorCard.innerHTML = `
+                  <div class="vendor-image">
+                    <i class="fas fa-store"></i>
+                  </div>
+                  <div class="vendor-details">
+                    <h3 class="vendor-name">${vendorData.businessName || vendorData.displayName || 'Unnamed Vendor'}</h3>
+                    <p class="vendor-description">${vendorData.businessDescription || 'No description available.'}</p>
+                    <div class="vendor-meta">
+                      <div><i class="fas fa-calendar-alt"></i> Joined ${formatDate(vendorData.createdAt)}</div>
+                    </div>
+                    <a href="products.html?vendor=${doc.id}" class="view-products-btn">View Products</a>
+                  </div>
+                `;
+                
+                vendorsContainer.appendChild(vendorCard);
+              });
+          });
+        })
+        .catch((error) => {
+          console.error('Error loading vendors:', error);
+          vendorsContainer.innerHTML = `
+            <div class="no-vendors">
+              <i class="fas fa-exclamation-circle"></i>
+              <h3>Error loading vendors</h3>
+              <p>Please try again later</p>
+            </div>
+          `;
+        });
+    }
+    
+    // Helper function to format date
+    function formatDate(timestamp) {
+      if (!timestamp) return 'Unknown';
+      
+      const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+  </script>
+</body>
+</html>

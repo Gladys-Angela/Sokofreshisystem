@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update All Pages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #00b761;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .instructions {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    pre {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .code-block {
+      font-family: monospace;
+      background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+    .button {
+      display: inline-block;
+      background-color: #00b761;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Update All Pages with Translation Support</h1>
+    
+    <div class="instructions">
+      <h2>Instructions</h2>
+      <p>To add translation support to all pages in your website, follow these steps:</p>
+      
+      <h3>Option 1: Add to each page individually</h3>
+      <p>Add the following code to the <code>&lt;head&gt;</code> section of each HTML page:</p>
+      <div class="code-block">
+        &lt;script src="js/translations.js"&gt;&lt;/script&gt;<br>
+        &lt;script src="js/global-translation.js"&gt;&lt;/script&gt;
+      </div>
+      
+      <h3>Option 2: Use the auto-include script (Recommended)</h3>
+      <p>Add just this one line to the <code>&lt;head&gt;</code> section of each HTML page:</p>
+      <div class="code-block">
+        &lt;script src="js/auto-include-translations.js"&gt;&lt;/script&gt;
+      </div>
+      
+      <h3>Option 3: Use a text editor search and replace</h3>
+      <p>Use your text editor's search and replace feature to find <code>&lt;/head&gt;</code> and replace it with:</p>
+      <div class="code-block">
+        &lt;script src="js/auto-include-translations.js"&gt;&lt;/script&gt;<br>
+        &lt;/head&gt;
+      </div>
+      
+      <h2>Testing</h2>
+      <p>After adding the script to your pages:</p>
+      <ol>
+        <li>Open any page in your browser</li>
+        <li>You should see a language selector in the top-right corner</li>
+        <li>Change the language and verify that text with <code>data-translate</code> attributes changes</li>
+      </ol>
+      
+      <h2>Adding Translatable Text</h2>
+      <p>To make text translatable, add the <code>data-translate</code> attribute to HTML elements:</p>
+      <div class="code-block">
+        &lt;h1 data-translate="welcome"&gt;Welcome&lt;/h1&gt;
+      </div>
+      <p>Then add the translation key to the translations.js file:</p>
+      <div class="code-block">
+        en: {<br>
+        &nbsp;&nbsp;welcome: "Welcome"<br>
+        },<br>
+        sw: {<br>
+        &nbsp;&nbsp;welcome: "Karibu"<br>
+        }
+      </div>
+    </div>
+    
+    <p>
+      <a href="index.html" class="button">Return to Homepage</a>
+    </p>
+  </div>
+</body>
+</html>

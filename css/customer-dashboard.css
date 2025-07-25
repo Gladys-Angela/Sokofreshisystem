@@ -1,0 +1,254 @@
+/* Customer Dashboard Styles */
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.dashboard-card h4 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.dashboard-card .icon {
+  font-size: 40px;
+  color: #0dd134;
+  margin-bottom: 15px;
+}
+
+.dashboard-card p {
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.dashboard-card .highlight {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0dd134;
+  margin: 10px 0;
+}
+
+.dashboard-btn {
+  display: inline-block;
+  background-color: #0dd134;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-btn:hover {
+  background-color: #0ab02b;
+}
+
+/* Vendor cards styling */
+.vendors-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.vendor-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.vendor-card:hover {
+  transform: translateY(-5px);
+}
+
+.vendor-icon {
+  font-size: 32px;
+  color: #0dd134;
+  margin-bottom: 10px;
+}
+
+.vendor-card h4 {
+  color: #333;
+  margin-bottom: 5px;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vendor-card p {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.vendor-btn {
+  display: inline-block;
+  background-color: #0dd134;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.vendor-btn:hover {
+  background-color: #0ab02b;
+}
+
+/* Quick actions */
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: 120px;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.2s;
+}
+
+.action-btn:hover {
+  transform: translateY(-5px);
+}
+
+.action-btn i {
+  font-size: 24px;
+  color: #0dd134;
+  margin-bottom: 10px;
+}
+
+/* Review styles */
+.review-form {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.review-form h4 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.star-rating {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  cursor: pointer;
+  font-size: 24px;
+  color: #ddd;
+  padding: 0 2px;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+  color: #ffb700;
+}
+
+.review-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+  min-height: 80px;
+  margin-bottom: 15px;
+}
+
+.review-form button {
+  background-color: #0dd134;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.review-item {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.review-user {
+  font-weight: bold;
+  color: #333;
+}
+
+.review-rating {
+  color: #ffb700;
+}
+
+.review-date {
+  color: #999;
+  font-size: 0.9em;
+}
+
+.review-content {
+  color: #555;
+  line-height: 1.5;
+}
+
+.no-reviews {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}

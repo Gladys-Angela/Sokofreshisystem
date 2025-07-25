@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Products | Vendor Portal - Soko freshi Groceries</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/vendor-products-enhanced.css" />
+  <link rel="stylesheet" type="text/css" href="css/vendor-footer.css" />
+  <link rel="stylesheet" type="text/css" href="css/vendor-nav.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navigation">
+    <a href="vendor_home.html" class="logo">
+      Soko freshi <small>Vendor</small>
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="vendor_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="manage_products.html" class="active"><i class="fas fa-box"></i> Products</a></li>
+      <li><a href="record_sales.html"><i class="fas fa-cash-register"></i> Record Sales</a></li>
+      <li><a href="sales_history.html"><i class="fas fa-history"></i> Sales History</a></li>
+      <li><a href="help_center.html"><i class="fas fa-question-circle"></i> Help</a></li>
+    </ul>
+    <div class="right-nav">
+      <a href="edit_profile.html" class="profile">
+        <i class="fas fa-user-circle"></i>
+        <span>Profile</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="vendor-container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="header-content">
+        <div class="header-text">
+          <h1>Manage Products</h1>
+          <p>View, edit, and manage your product inventory</p>
+        </div>
+        <div class="header-actions">
+          <a href="add_product.html" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+            Add New Product
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <ul>
+        <li><a href="vendor_dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><i class="fas fa-angle-right"></i></li>
+        <li>Manage Products</li>
+      </ul>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="stats-overview">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-box"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number" id="total-products">0</div>
+          <div class="stat-label">Total Products</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon in-stock">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number" id="in-stock-products">0</div>
+          <div class="stat-label">In Stock</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon low-stock">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number" id="low-stock-products">0</div>
+          <div class="stat-label">Low Stock</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon out-of-stock">
+          <i class="fas fa-times-circle"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number" id="out-of-stock-products">0</div>
+          <div class="stat-label">Out of Stock</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="controls-section">
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-input" placeholder="Search products by name or category...">
+        </div>
+      </div>
+      
+      <div class="filter-container">
+        <select id="category-filter" class="filter-select">
+          <option value="">All Categories</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Vegetables">Vegetables</option>
+          <option value="Fish & Meat">Fish & Meat</option>
+          <option value="Spices">Spices</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Bakery">Bakery</option>
+          <option value="Beverages">Beverages</option>
+        </select>
+        
+        <select id="stock-filter" class="filter-select">
+          <option value="">All Stock Levels</option>
+          <option value="in-stock">In Stock</option>
+          <option value="low-stock">Low Stock</option>
+          <option value="out-of-stock">Out of Stock</option>
+        </select>
+        
+        <button id="clear-filters" class="btn btn-secondary">
+          <i class="fas fa-times"></i>
+          Clear Filters
+        </button>
+      </div>
+    </div>
+
+    <!-- Product Count -->
+    <div class="product-count-section">
+      <div id="product-count-container">
+        <div class="product-count-loader">
+          <i class="fas fa-spinner fa-spin"></i>
+          <span id="product-count" class="product-count">Loading product count...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Container -->
+    <div id="products-container" class="products-container">
+      <!-- Initial loading state -->
+      <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <div class="loading-content">
+          <h4>Loading Your Products</h4>
+          <p>Please wait while we fetch your inventory</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <a href="vendor_home.html">Soko freshi</a>
+          <p>Your trusted platform for fresh groceries and quality products.</p>
+        </div>
+        
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="vendor_dashboard.html">Dashboard</a></li>
+            <li><a href="manage_products.html">Manage Products</a></li>
+            <li><a href="add_product.html">Add Product</a></li>
+            <li><a href="sales_history.html">Sales History</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="help_center.html">Help Center</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Soko freshi Groceries. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-storage-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/enhanced-loading.js"></script>
+  <script src="js/vendor-products.js"></script>
+  <script src="js/manage-products.js"></script>
+  <script src="js/hide-nav-links.js"></script>
+
+  <script>
+    // Logout functionality
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (confirm('Are you sure you want to logout?')) {
+        firebase.auth().signOut().then(() => {
+          window.location.href = 'index.html';
+        }).catch((error) => {
+          alert('Error signing out: ' + error.message);
+        });
+      }
+    });
+
+    // Search and filter functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('search-input');
+      const categoryFilter = document.getElementById('category-filter');
+      const stockFilter = document.getElementById('stock-filter');
+      const clearFiltersBtn = document.getElementById('clear-filters');
+
+      // Add event listeners for search and filters
+      if (searchInput) {
+        searchInput.addEventListener('input', debounce(filterProducts, 300));
+      }
+      
+      if (categoryFilter) {
+        categoryFilter.addEventListener('change', filterProducts);
+      }
+      
+      if (stockFilter) {
+        stockFilter.addEventListener('change', filterProducts);
+      }
+      
+      if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', clearAllFilters);
+      }
+    });
+
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    function filterProducts() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const categoryFilter = document.getElementById('category-filter').value;
+      const stockFilter = document.getElementById('stock-filter').value;
+      
+      const productCards = document.querySelectorAll('.product-card');
+      let visibleCount = 0;
+
+      productCards.forEach(card => {
+        const productName = card.querySelector('.product-name').textContent.toLowerCase();
+        const productCategory = card.querySelector('.product-category').textContent;
+        const stockBadge = card.querySelector('.stock-badge');
+        const stockClass = stockBadge ? stockBadge.className : '';
+
+        let showCard = true;
+
+        // Search filter
+        if (searchTerm && !productName.includes(searchTerm) && !productCategory.toLowerCase().includes(searchTerm)) {
+          showCard = false;
+        }
+
+        // Category filter
+        if (categoryFilter && productCategory !== categoryFilter) {
+          showCard = false;
+        }
+
+        // Stock filter
+        if (stockFilter) {
+          if (stockFilter === 'in-stock' && !stockClass.includes('in-stock')) {
+            showCard = false;
+          } else if (stockFilter === 'low-stock' && !stockClass.includes('low-stock')) {
+            showCard = false;
+          } else if (stockFilter === 'out-of-stock' && !stockClass.includes('out-of-stock')) {
+            showCard = false;
+          }
+        }
+
+        card.style.display = showCard ? 'block' : 'none';
+        if (showCard) visibleCount++;
+      });
+
+      // Update product count
+      updateProductCount(visibleCount);
+    }
+
+    function clearAllFilters() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('category-filter').value = '';
+      document.getElementById('stock-filter').value = '';
+      
+      const productCards = document.querySelectorAll('.product-card');
+      productCards.forEach(card => {
+        card.style.display = 'block';
+      });
+      
+      updateProductCount(productCards.length);
+    }
+  </script>
+</body>
+</html>

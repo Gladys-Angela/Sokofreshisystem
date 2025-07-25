@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Soko freshi Store</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/modern-nav.css" />
+  <link rel="stylesheet" type="text/css" href="css/modern-about.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="index.html" data-translate="home">Home</a></li>
+      <li><a href="products.html" data-translate="products">Products</a></li>
+      <li><a href="about.html" class="active" data-translate="about">About Us</a></li>
+      <li><a href="customer_dashboard.html" data-translate="dashboard">Dashboard</a></li>
+    </ul>
+    <div class="right-nav" id="guest-nav">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span>0</span>
+      </a>
+      <a href="login_redirect.html" class="login">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span data-translate="login">Login</span>
+      </a>
+      <a href="register_redirect.html" class="register">
+        <i class="fa-solid fa-user-plus"></i>
+        <span data-translate="register">Register</span>
+      </a>
+    </div>
+    <div class="right-nav" id="user-nav" style="display: none;">
+      <a href="wishlist.html" class="like">
+        <i class="far fa-heart"></i>
+        <span id="wishlist-count-user">0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span>0</span>
+      </a>
+      <a href="my_orders.html" class="my-orders">
+        <i class="fas fa-receipt"></i>
+        <span data-translate="my_orders">My Orders</span>
+      </a>
+      <a href="customer_dashboard.html" class="dashboard">
+        <i class="fas fa-user"></i>
+        <span data-translate="dashboard">Dashboard</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span data-translate="logout">Logout</span>
+      </a>
+    </div>
+  </nav>
+  <div class="language-selector-container">
+    <select id="language-selector">
+      <option value="en" data-translate="english">English</option>
+      <option value="sw" data-translate="swahili">Swahili</option>
+    </select>
+  </div>
+  
+  <!-- About Us Section -->
+  <section class="about-section">
+    <!-- Hero Section -->
+    <div class="about-hero">
+      <div class="about-hero-content">
+        <h1>Fresh Food, Delivered with Care</h1>
+        <p>We're revolutionizing grocery shopping by connecting consumers directly with the freshest produce and quality essentials.</p>
+        <a href="products.html" class="about-hero-btn">Explore Our Products</a>
+      </div>
+    </div>
+
+    <!-- Mission Section -->
+    <div class="mission-section">
+      <div class="about-container">
+        <div class="section-title">
+          <h2>Our Mission</h2>
+          <p>At Soko freshi, we're committed to making fresh, nutritious food accessible to everyone while supporting local farmers and sustainable practices.</p>
+        </div>
+        
+        <div class="mission-cards">
+          <div class="mission-card">
+            <div class="mission-card-img">
+              <img src="images/vegetable.png" alt="Quality">
+            </div>
+            <div class="mission-card-content">
+              <h3>Quality & Excellence</h3>
+              <p>We meticulously select each product that enters our inventory, ensuring only premium quality reaches your home. From farm-fresh vegetables to premium meats, our rigorous quality control guarantees excellence with every purchase.</p>
+            </div>
+          </div>
+          
+          <div class="mission-card">
+            <div class="mission-card-img">
+              <img src="images/salad.png" alt="Community">
+            </div>
+            <div class="mission-card-content">
+              <h3>Community & Sustainability</h3>
+              <p>Soko freshi is committed to building stronger communities by partnering with local farmers and suppliers. By shortening the supply chain, we deliver fresher products while reducing our environmental footprint and supporting local economies.</p>
+            </div>
+          </div>
+          
+          <div class="mission-card">
+            <div class="mission-card-img">
+              <img src="images/tomato.png" alt="Innovation">
+            </div>
+            <div class="mission-card-content">
+              <h3>Innovation & Convenience</h3>
+              <p>We leverage technology to make grocery shopping seamless and enjoyable. Our platform connects you directly with fresh produce, offering convenience without compromising on quality or sustainability.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+      <div class="about-container">
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-number" data-count="5000">0</div>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <div class="stat-number" data-count="200">0</div>
+            <div class="stat-label">Local Farmers</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-apple-alt"></i>
+            </div>
+            <div class="stat-number" data-count="500">0</div>
+            <div class="stat-label">Products</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-city"></i>
+            </div>
+            <div class="stat-number" data-count="15">0</div>
+            <div class="stat-label">Cities Served</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+      <div class="about-container">
+        <div class="section-title">
+          <h2>Why Choose Us</h2>
+          <p>We're dedicated to providing the best grocery shopping experience with quality products and exceptional service.</p>
+        </div>
+        
+        <div class="features-container">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-truck-fast"></i>
+            </div>
+            <h3>Reliable Delivery</h3>
+            <p>Our dedicated logistics network ensures timely delivery of fresh groceries to your doorstep, with real-time tracking and flexible delivery options.</p>
+          </div>
+          
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Quality Assurance</h3>
+            <p>Every product undergoes strict quality checks before reaching you, guaranteeing farm-fresh produce and premium quality groceries every time.</p>
+          </div>
+          
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-tag"></i>
+            </div>
+            <h3>Value & Transparency</h3>
+            <p>We offer competitive pricing with no hidden fees, regular promotions, and a loyalty program that rewards you for choosing quality.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="team-section">
+      <div class="about-container">
+        <div class="section-title">
+          <h2>Meet Our Leadership Team</h2>
+          <p>The passionate professionals behind Soko freshi who are committed to bringing you the freshest groceries.</p>
+        </div>
+        
+        <div class="team-container">
+          <div class="team-member">
+            <div class="member-image">
+              <img src="images/client1.png" alt="Sarah Johnson">
+            </div>
+            <div class="member-info">
+              <h3>Sarah Johnson</h3>
+              <p>Chief Executive Officer</p>
+              <div class="member-social">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="images/client2.jpeg" alt="David Mwangi">
+            </div>
+            <div class="member-info">
+              <h3>David Mwangi</h3>
+              <p>Operations Director</p>
+              <div class="member-social">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="images/client3.jpg" alt="Amina Wanjiku">
+            </div>
+            <div class="member-info">
+              <h3>Amina Wanjiku</h3>
+              <p>Head of Procurement</p>
+              <div class="member-social">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <div class="about-container">
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Find answers to common questions about our services and operations.</p>
+        </div>
+        
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question">How does Soko freshi ensure product quality?</div>
+            <div class="faq-answer">
+              <p>At Soko freshi, quality is our priority. We work directly with certified farmers and trusted suppliers who follow strict quality standards. Our dedicated quality assurance team inspects all products before they enter our inventory, and we maintain optimal storage conditions to preserve freshness until delivery.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">What are your delivery options and timeframes?</div>
+            <div class="faq-answer">
+              <p>Soko freshi offers three flexible delivery options to meet your needs:</p>
+              <ul>
+                <li><strong>Standard Delivery:</strong> Next-day service available throughout Nairobi and surrounding areas (Ksh 150, free for orders above Ksh 2,000)</li>
+                <li><strong>Express Delivery:</strong> Same-day delivery for orders placed before 10:00 AM (Ksh 300, free for orders above Ksh 5,000)</li>
+                <li><strong>Scheduled Delivery:</strong> Select your preferred 2-hour delivery window up to 7 days in advance (Ksh 200, free for orders above Ksh 3,000)</li>
+              </ul>
+              <p>All deliveries include real-time tracking through our mobile app and SMS notifications at key delivery milestones.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">How does Soko freshi support local communities?</div>
+            <div class="faq-answer">
+              <p>At Soko freshi, community support is integrated into our business model through several key initiatives:</p>
+              <ul>
+                <li><strong>Direct Sourcing Network:</strong> We've established partnerships with over 200 small-scale farmers across Kenya, eliminating middlemen and ensuring 80% of our produce comes from within 150km of our distribution centers.</li>
+                <li><strong>Fair Compensation Program:</strong> Our farmers receive payments 15-20% above market rates, with guaranteed purchase agreements that provide income stability regardless of market fluctuations.</li>
+                <li><strong>Soko freshi Foundation:</strong> We invest 3% of our annual profits in agricultural education, providing scholarships and training programs that have benefited over 500 young farmers since 2025.</li>
+                <li><strong>Rural Infrastructure:</strong> Through our "Grow Together" initiative, we've helped develop cold storage facilities in 12 rural communities, reducing post-harvest losses by up to 40%.</li>
+              </ul>
+              <p>These efforts create sustainable economic growth while ensuring you receive the freshest produce possible.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">What is your quality guarantee policy?</div>
+            <div class="faq-answer">
+              <p><strong>Our "Farm-to-Table Freshness Guarantee"</strong> ensures your complete satisfaction:</p>
+              <ul>
+                <li><strong>100% Satisfaction Promise:</strong> If any product fails to meet your expectations in terms of freshness, quality, or condition, we'll make it right immediately.</li>
+                <li><strong>Simple Claims Process:</strong> Report quality concerns within 48 hours of delivery through our app, website, or customer service line (0758 599393). Include a photo if possible, but it's not required.</li>
+                <li><strong>Flexible Resolution Options:</strong> Choose between a no-questions-asked refund to your original payment method (processed within 24 hours) or expedited replacement delivery at no additional cost.</li>
+              </ul>
+              <p>This guarantee applies to all products, with no minimum purchase requirement and no return shipping necessary for perishable items.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <div class="about-container">
+        <div class="cta-content">
+          <h2>Ready to Experience the Soko freshi Difference?</h2>
+          <p>Join thousands of satisfied customers who enjoy fresh, quality groceries delivered right to their doorstep.</p>
+          <a href="products.html" class="cta-btn">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="#">Soko freshi</a>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <strong data-translate="quick_links">Quick Links</strong>
+        <ul>
+          <li><a href="index.html" data-translate="home">Home</a></li>
+          <li><a href="products.html" data-translate="products">Products</a></li>
+          <li><a href="about.html" data-translate="about">About Us</a></li>
+          <li><a href="contact.html" data-translate="contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong>Categories</strong>
+        <ul>
+          <li><a href="products.html?category=Fruits">Fruits</a></li>
+          <li><a href="products.html?category=Vegetables">Vegetables</a></li>
+          <li><a href="products.html?category=Fish & Meat">Fish & Meat</a></li>
+          <li><a href="products.html?category=Spices">Spices</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <strong data-translate="contact_us">Contact Us</strong>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+          <li><i class="fas fa-phone-alt"></i> +254 758 599393</li>
+          <li><i class="fas fa-envelope"></i> angie@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Counter animation for stats
+    document.addEventListener('DOMContentLoaded', function() {
+      const counters = document.querySelectorAll('.stat-number');
+      const speed = 200;
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.getAttribute('data-count'));
+            let count = 0;
+            const updateCount = () => {
+              const increment = target / speed;
+              if (count < target) {
+                count += increment;
+                counter.innerText = Math.ceil(count);
+                setTimeout(updateCount, 1);
+              } else {
+                counter.innerText = target;
+              }
+            };
+            updateCount();
+            observer.unobserve(counter);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      counters.forEach(counter => {
+        observer.observe(counter);
+      });
+      
+      // FAQ accordion
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          
+          // Close all items
+          faqItems.forEach(faqItem => {
+            faqItem.classList.remove('active');
+          });
+          
+          // Open clicked item if it wasn't active
+          if (!isActive) {
+            item.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+  
+  <script src="js/main.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/translate.js"></script>
+  <script src="js/language-fix.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/role-redirect.js"></script>
+  <script src="js/about-us.js"></script>
+  <script src="js/hide-nav-links.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/navigation.js"></script>
+  <script>
+    auth.onAuthStateChanged((user) => {
+      const guestNav = document.getElementById('guest-nav');
+      const userNav = document.getElementById('user-nav');
+      if (user) {
+        // User is signed in
+        guestNav.style.display = 'none';
+        userNav.style.display = 'flex';
+
+        const logoutBtn = document.getElementById('logout-btn');
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          auth.signOut().then(() => {
+            // Sign-out successful.
+            window.location.href = 'index.html';
+          }).catch((error) => {
+            // An error happened.
+            alert(error.message);
+          });
+        });
+
+      } else {
+        // No user is signed in.
+        guestNav.style.display = 'flex';
+        userNav.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

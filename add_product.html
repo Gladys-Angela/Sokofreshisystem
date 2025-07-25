@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Product | Vendor Portal - Soko freshi Groceries</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <style>
+    :root {
+      --primary-color: #00b761;
+      --primary-dark: #009d53;
+      --secondary-color: #f8f9fa;
+      --text-color: #333;
+      --light-text: #666;
+      --white: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --border-radius: 10px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      padding: 20px 0;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+    
+    .sidebar-header {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar-header .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    
+    .sidebar-header .logo span {
+      color: var(--primary-color);
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+    }
+    
+    .sidebar-menu li {
+      margin-bottom: 5px;
+    }
+    
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: var(--light-text);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .sidebar-menu a:hover {
+      background-color: rgba(0, 183, 97, 0.1);
+      color: var(--primary-color);
+    }
+    
+    .sidebar-menu a.active {
+      background-color: rgba(0, 183, 97, 0.1);
+      color: var(--primary-color);
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .sidebar-menu i {
+      margin-right: 10px;
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 250px;
+      padding: 20px;
+      transition: var(--transition);
+    }
+    
+    /* Page Header */
+    .page-header {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 25px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .page-header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 5px;
+    }
+    
+    .page-header p {
+      color: var(--light-text);
+      font-size: 14px;
+    }
+    
+    /* Form Container */
+    .form-container {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .form-header {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+    
+    .form-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 5px;
+    }
+    
+    .form-header p {
+      color: var(--light-text);
+      font-size: 14px;
+    }
+    
+    .form-section {
+      margin-bottom: 30px;
+    }
+    
+    .form-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .form-section-title i {
+      margin-right: 8px;
+      color: var(--primary-color);
+    }
+    
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+    }
+    
+    .form-col {
+      flex: 1;
+      padding: 0 10px;
+      min-width: 250px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 183, 97, 0.1);
+      outline: none;
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .form-help {
+      font-size: 12px;
+      color: var(--light-text);
+      margin-top: 5px;
+    }
+    
+    /* Image Options */
+    .image-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+    
+    .image-option {
+      border: 2px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .image-option:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .image-option.selected {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 183, 97, 0.2);
+    }
+    
+    .image-option img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .image-option-name {
+      padding: 5px;
+      text-align: center;
+      font-size: 12px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #eee;
+    }
+    
+    /* Product Preview */
+    .product-preview {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .product-preview img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+    
+    .product-preview-info h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .product-preview-info p {
+      color: var(--light-text);
+      margin-bottom: 5px;
+    }
+    
+    .product-preview-info p:last-child {
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    /* Form Actions */
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    
+    .btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+    }
+    
+    .btn i {
+      margin-right: 8px;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-secondary {
+      background-color: #f1f1f1;
+      color: var(--text-color);
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e5e5e5;
+      transform: translateY(-2px);
+    }
+    
+    /* Success Animation */
+    .success-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .success-animation.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .success-content {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+    
+    .success-animation.show .success-content {
+      transform: translateY(0);
+    }
+    
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      background-color: rgba(0, 183, 97, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    
+    .success-icon i {
+      font-size: 30px;
+      color: var(--primary-color);
+    }
+    
+    .success-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    
+    .success-message {
+      color: var(--light-text);
+      margin-bottom: 20px;
+    }
+    
+    .success-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    
+    /* Dashboard Container */
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .form-row {
+        flex-direction: column;
+      }
+      
+      .form-col {
+        margin-bottom: 15px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .page-header .btn {
+        margin-top: 15px;
+      }
+      
+      .product-preview {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .product-preview img {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      .form-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <a href="vendor_dashboard.html" class="logo">
+          Soko freshi
+        </a>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li>
+          <a href="vendor_dashboard.html">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="manage_products.html">
+            <i class="fas fa-box"></i>
+            <span>Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="add_product.html" class="active">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add Product</span>
+          </a>
+        </li>
+        <li>
+          <a href="sales_history.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Sales</span>
+          </a>
+        </li>
+        <li>
+          <a href="record_sales.html">
+            <i class="fas fa-receipt"></i>
+            <span>Record Sale</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.html">
+            <i class="fas fa-store"></i>
+            <span>Visit Store</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1>Add New Product</h1>
+          <p>Create a new product listing for your inventory</p>
+        </div>
+        <a href="manage_products.html" class="btn btn-secondary">
+          <i class="fas fa-arrow-left"></i> Back to Products
+        </a>
+      </div>
+      
+      <!-- Product Preview -->
+      <div class="product-preview" id="product-preview">
+        <img src="images/default-product.png" alt="Product" id="preview-image">
+        <div class="product-preview-info">
+          <h3 id="preview-name">Product Name</h3>
+          <p id="preview-category">Category</p>
+          <p id="preview-price">Ksh 0</p>
+        </div>
+      </div>
+      
+      <!-- Add Product Form -->
+      <div class="form-container">
+        <div class="form-header">
+          <h2>Product Information</h2>
+          <p>Fill in the details below to add a new product to your inventory</p>
+        </div>
+        
+        <form id="add-product-form">
+          <div class="form-section">
+            <div class="form-section-title">
+              <i class="fas fa-info-circle"></i> Basic Information
+            </div>
+            
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="product-name">Product Name</label>
+                  <input type="text" id="product-name" name="name" required placeholder="Enter product name">
+                  <div class="form-help">Name should be clear and descriptive</div>
+                </div>
+              </div>
+              
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="product-category">Category</label>
+                  <select id="product-category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Fish & Meat">Fish & Meat</option>
+                    <option value="Spices">Spices</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Bakery">Bakery</option>
+                    <option value="Beverages">Beverages</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="product-price">Price (Ksh)</label>
+                  <input type="number" id="product-price" name="price" min="0" step="1" required placeholder="0">
+                </div>
+              </div>
+              
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="product-stock">Stock Quantity</label>
+                  <input type="number" id="product-stock" name="stock" min="0" step="1" required placeholder="0">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <div class="form-section-title">
+              <i class="fas fa-image"></i> Product Image
+            </div>
+            
+            <div class="form-group">
+              <label>Select an image for your product</label>
+              <input type="hidden" id="product-image" name="image" required>
+              <div class="image-options">
+                <div class="image-option" data-image="images/apple.jpg">
+                  <img src="images/apple.jpg" alt="Apple">
+                  <div class="image-option-name">Apple</div>
+                </div>
+                <div class="image-option" data-image="images/orange.jpg">
+                  <img src="images/orange.jpg" alt="Orange">
+                  <div class="image-option-name">Orange</div>
+                </div>
+                <div class="image-option" data-image="images/mango.jpg">
+                  <img src="images/mango.jpg" alt="Mango">
+                  <div class="image-option-name">Mango</div>
+                </div>
+                <div class="image-option" data-image="images/tomato.png">
+                  <img src="images/tomato.png" alt="Tomato">
+                  <div class="image-option-name">Tomato</div>
+                </div>
+                <div class="image-option" data-image="images/onion.jpg">
+                  <img src="images/onion.jpg" alt="Onion">
+                  <div class="image-option-name">Onion</div>
+                </div>
+                <div class="image-option" data-image="images/potato.jpg">
+                  <img src="images/potato.jpg" alt="Potato">
+                  <div class="image-option-name">Potato</div>
+                </div>
+                <div class="image-option" data-image="images/cauliflower.jpg">
+                  <img src="images/cauliflower.jpg" alt="Cauliflower">
+                  <div class="image-option-name">Cauliflower</div>
+                </div>
+                <div class="image-option" data-image="images/raddish.jpg">
+                  <img src="images/raddish.jpg" alt="Raddish">
+                  <div class="image-option-name">Raddish</div>
+                </div>
+                <div class="image-option" data-image="images/lemon.jpg">
+                  <img src="images/lemon.jpg" alt="Lemon">
+                  <div class="image-option-name">Lemon</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <div class="form-section-title">
+              <i class="fas fa-align-left"></i> Product Description
+            </div>
+            
+            <div class="form-group">
+              <label for="product-description">Description</label>
+              <textarea id="product-description" name="description" placeholder="Enter a detailed description of your product..."></textarea>
+              <div class="form-help">A good description helps customers understand your product better</div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='manage_products.html'">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-plus"></i> Add Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Animation -->
+  <div class="success-animation" id="success-animation">
+    <div class="success-content">
+      <div class="success-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h3 class="success-title">Product Added Successfully!</h3>
+      <p class="success-message">Your new product has been added to your inventory.</p>
+      <div class="success-actions">
+        <button class="btn btn-secondary" onclick="window.location.href='add_product.html'">
+          <i class="fas fa-plus"></i> Add Another
+        </button>
+        <button class="btn btn-primary" onclick="window.location.href='manage_products.html'">
+          <i class="fas fa-eye"></i> View Products
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-storage-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/add-product.js"></script>
+  <script src="js/hide-nav-links.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Live preview functionality
+      const productNameInput = document.getElementById('product-name');
+      const productCategorySelect = document.getElementById('product-category');
+      const productPriceInput = document.getElementById('product-price');
+      const previewName = document.getElementById('preview-name');
+      const previewCategory = document.getElementById('preview-category');
+      const previewPrice = document.getElementById('preview-price');
+      const previewImage = document.getElementById('preview-image');
+      
+      // Update preview on input change
+      productNameInput.addEventListener('input', function() {
+        previewName.textContent = this.value || 'Product Name';
+      });
+      
+      productCategorySelect.addEventListener('change', function() {
+        previewCategory.textContent = this.options[this.selectedIndex].text || 'Category';
+      });
+      
+      productPriceInput.addEventListener('input', function() {
+        previewPrice.textContent = 'Ksh ' + (this.value || '0');
+      });
+      
+      // Image selection
+      const imageOptions = document.querySelectorAll('.image-option');
+      const productImageInput = document.getElementById('product-image');
+      
+      imageOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove selected class from all options
+          imageOptions.forEach(opt => opt.classList.remove('selected'));
+          
+          // Add selected class to clicked option
+          this.classList.add('selected');
+          
+          // Update hidden input value
+          const imagePath = this.getAttribute('data-image');
+          productImageInput.value = imagePath;
+          
+          // Update preview image
+          previewImage.src = imagePath;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

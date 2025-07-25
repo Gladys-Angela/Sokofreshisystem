@@ -1,0 +1,32 @@
+<!-- Chat Support Button -->
+<div class="chat-support">
+  <div class="chat-btn" id="chat-btn">
+    <i class="fas fa-comments"></i>
+  </div>
+  <div class="chat-tooltip">Need Help? Chat with Us</div>
+</div>
+
+<!-- Chat Widget -->
+<div class="chat-widget" id="chat-widget">
+  <div class="chat-header">
+    <h3><i class="fas fa-headset"></i> Soko freshi Support</h3>
+    <button class="close-btn" id="close-chat"><i class="fas fa-times"></i></button>
+  </div>
+  
+  <div class="chat-body" id="chat-body">
+    <div class="chat-message bot-message">
+      👋 Hello! Welcome to Soko freshi Support. How can I help you today?
+    </div>
+    
+    <div class="quick-replies">
+      <div class="quick-reply" onclick="sendQuickReply('How do I add products?')">How do I add products?</div>
+      <div class="quick-reply" onclick="sendQuickReply('How to track sales?')">How to track sales?</div>
+      <div class="quick-reply" onclick="sendQuickReply('Payment issues')">Payment issues</div>
+    </div>
+  </div>
+  
+  <div class="chat-footer">
+    <input type="text" class="chat-input" id="chat-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+    <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>

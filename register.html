@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Soko freshi Groceries</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9f7ec 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .register-container {
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 900px;
+      max-width: 95%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .register-header {
+      background: linear-gradient(135deg, #0dd134 0%, #0ab02a 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .register-header h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    
+    .register-header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    
+    .register-options {
+      display: flex;
+      padding: 40px;
+      gap: 20px;
+    }
+    
+    .register-option {
+      flex: 1;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid transparent;
+    }
+    
+    .register-option:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .register-option.customer {
+      background-color: #f1f9f3;
+      border-color: #0dd134;
+    }
+    
+    .register-option.vendor {
+      background-color: #f0f7ff;
+      border-color: #007bff;
+    }
+    
+    .register-option i {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    
+    .register-option.customer i {
+      color: #0dd134;
+    }
+    
+    .register-option.vendor i {
+      color: #007bff;
+    }
+    
+    .register-option h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .register-option p {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .btn {
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .btn-customer {
+      background-color: #0dd134;
+      color: white;
+    }
+    
+    .btn-customer:hover {
+      background-color: #0ab02a;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(13, 209, 52, 0.3);
+    }
+    
+    .btn-vendor {
+      background-color: #007bff;
+      color: white;
+    }
+    
+    .btn-vendor:hover {
+      background-color: #0069d9;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    }
+    
+    .login-link {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #eee;
+    }
+    
+    .login-link a {
+      color: #0dd134;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+    
+    .back-to-home {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .back-to-home:hover {
+      color: #0dd134;
+    }
+    
+    .back-to-home i {
+      margin-right: 5px;
+    }
+    
+    @media (max-width: 768px) {
+      .register-options {
+        flex-direction: column;
+      }
+      
+      .register-option {
+        margin-bottom: 20px;
+      }
+      
+      .back-to-home {
+        top: 10px;
+        left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-to-home">
+    <i class="fas fa-arrow-left"></i> Back to Home
+  </a>
+  
+  <div class="register-container">
+    <div class="register-header">
+      <h2>Join Soko freshi Today</h2>
+      <p>Choose how you want to register with us</p>
+    </div>
+    
+    <div class="register-options">
+      <div class="register-option customer" onclick="window.location.href='register_customer.html'">
+        <i class="fas fa-user"></i>
+        <h3>Customer</h3>
+        <p>Create a customer account to shop fresh groceries, track your orders, and save your favorite products.</p>
+        <a href="register_customer.html" class="btn btn-customer">Register as Customer</a>
+      </div>
+      
+      <div class="register-option vendor" onclick="window.location.href='register_vendor.html'">
+        <i class="fas fa-store"></i>
+        <h3>Vendor</h3>
+        <p>Create a vendor account to sell your products, manage inventory, and grow your business with Soko freshi.</p>
+        <a href="register_vendor.html" class="btn btn-vendor">Register as Vendor</a>
+      </div>
+    </div>
+    
+    <div class="login-link">
+      <p>Already have an account? <a href="login.html">Sign In</a></p>
+    </div>
+  </div>
+</body>
+</html>

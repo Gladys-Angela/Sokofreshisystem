@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Login</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <style>
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    #login-error {
+      color: #e74c3c;
+      margin-top: 15px;
+      text-align: center;
+      display: none;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: rgba(231, 76, 60, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-info">
+      <a href="index.html" class="logo" style="color: white; font-size: 2.5rem; margin-bottom: 20px;">
+        Soko freshi
+      </a>
+      <h2>Welcome Back!</h2>
+      <p>Log in to access your account, track your orders, and enjoy fresh groceries delivered to your doorstep.</p>
+    </div>
+    
+    <div class="login-form">
+      <h2>Sign In</h2>
+      <p>Please enter your credentials to continue</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        
+        <div class="form-group" style="text-align: right;">
+          <a href="forgot_password.html" style="color: #00b761; text-decoration: none; font-size: 0.9rem;">Forgot Password?</a>
+        </div>
+        
+        <button type="submit" class="btn-primary">Sign In</button>
+        
+        <div id="login-error"></div>
+      </form>
+      
+      <div class="login-links">
+        <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.appspot.com",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  </script>
+  <script src="js/unified-login.js"></script>
+</body>
+</html>

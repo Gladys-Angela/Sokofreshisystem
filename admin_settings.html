@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Settings - Soko freshi</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="css/language-selector.css">
+  <style>
+    :root {
+      --primary-color: #00b761;
+      --primary-dark: #009d53;
+      --secondary-color: #f8f9fa;
+      --text-color: #333;
+      --light-text: #666;
+      --white: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --border-radius: 10px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      padding: 20px 0;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+    
+    .sidebar-header {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar-header .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    
+    .sidebar-header .logo span {
+      color: var(--primary-color);
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+    }
+    
+    .sidebar-menu li {
+      margin-bottom: 5px;
+    }
+    
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: var(--light-text);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .sidebar-menu a:hover {
+      background-color: rgba(0, 183, 97, 0.1);
+      color: var(--primary-color);
+    }
+    
+    .sidebar-menu a.active {
+      background-color: rgba(0, 183, 97, 0.1);
+      color: var(--primary-color);
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .sidebar-menu i {
+      margin-right: 10px;
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 250px;
+      padding: 20px;
+      transition: var(--transition);
+    }
+    
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .page-header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+    
+    .user-info .user-name {
+      margin-right: 15px;
+      font-weight: 500;
+    }
+    
+    .user-info .logout-btn {
+      background-color: #f1f1f1;
+      color: var(--text-color);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+    }
+    
+    .user-info .logout-btn:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .user-info .logout-btn i {
+      margin-right: 5px;
+    }
+    
+    /* Settings Sections */
+    .settings-section {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .settings-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .settings-header i {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-right: 15px;
+    }
+    
+    .settings-header h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group input[type="number"],
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+      transition: var(--transition);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(0, 183, 97, 0.1);
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .form-row .form-group {
+      flex: 1;
+    }
+    
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .toggle-slider {
+      background-color: var(--primary-color);
+    }
+    
+    input:focus + .toggle-slider {
+      box-shadow: 0 0 1px var(--primary-color);
+    }
+    
+    input:checked + .toggle-slider:before {
+      transform: translateX(26px);
+    }
+    
+    .toggle-label {
+      margin-left: 10px;
+      font-weight: 500;
+    }
+    
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .btn-secondary {
+      background-color: #f1f1f1;
+      color: var(--text-color);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+      margin-right: 10px;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar {
+        width: 70px;
+        overflow: hidden;
+      }
+      
+      .sidebar-header {
+        padding: 0 10px 20px;
+      }
+      
+      .sidebar-header .logo span:not(:first-child) {
+        display: none;
+      }
+      
+      .sidebar-menu a span {
+        display: none;
+      }
+      
+      .sidebar-menu a {
+        justify-content: center;
+        padding: 12px;
+      }
+      
+      .sidebar-menu i {
+        margin-right: 0;
+      }
+      
+      .main-content {
+        margin-left: 70px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <a href="admin_dashboard.html" class="logo">
+          Soko freshi
+        </a>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li>
+          <a href="admin_dashboard.html">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_users.html">
+            <i class="fas fa-users"></i>
+            <span>Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_vendors.html">
+            <i class="fas fa-store"></i>
+            <span>Vendors</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_products.html">
+            <i class="fas fa-box"></i>
+            <span>Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_orders.html">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_reports.html">
+            <i class="fas fa-chart-bar"></i>
+            <span>Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin_settings.html" class="active">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.html">
+            <i class="fas fa-home"></i>
+            <span>Visit Site</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="page-header">
+        <h1>Settings</h1>
+        <div class="user-info">
+          <span class="user-name" id="admin-name">Admin</span>
+          <button class="logout-btn" id="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+      
+      <!-- General Settings -->
+      <div class="settings-section">
+        <div class="settings-header">
+          <i class="fas fa-globe" style="background-color: rgba(0, 123, 255, 0.1); color: #007bff;"></i>
+          <h2>General Settings</h2>
+        </div>
+        
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="site_name">Site Name</label>
+              <input type="text" id="site_name" name="site_name" value="Soko freshi Groceries">
+            </div>
+            
+            <div class="form-group">
+              <label for="site_tagline">Site Tagline</label>
+              <input type="text" id="site_tagline" name="site_tagline" value="Fresh Groceries Delivered to Your Doorstep">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="site_description">Site Description</label>
+            <textarea id="site_description" name="site_description" rows="3">Soko freshi is an online grocery platform that connects customers with local vendors selling fresh produce, meat, fish, and spices. We deliver fresh groceries right to your doorstep!</textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact_email">Contact Email</label>
+              <input type="email" id="contact_email" name="contact_email" value="support@efresh.co.ke">
+            </div>
+            
+            <div class="form-group">
+              <label for="contact_phone">Contact Phone</label>
+              <input type="text" id="contact_phone" name="contact_phone" value="+254 758 599393">
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-secondary">Cancel</button>
+            <button type="submit" class="btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Payment Settings -->
+      <div class="settings-section">
+        <div class="settings-header">
+          <i class="fas fa-credit-card" style="background-color: rgba(40, 167, 69, 0.1); color: #28a745;"></i>
+          <h2>Payment Settings</h2>
+        </div>
+        
+        <form>
+          <div class="toggle-container">
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Enable M-Pesa Payments</span>
+          </div>
+          
+          <div class="toggle-container">
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Enable Credit Card Payments</span>
+          </div>
+          
+          <div class="toggle-container">
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Enable Cash on Delivery</span>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="currency">Currency</label>
+              <select id="currency" name="currency">
+                <option value="KES" selected>Kenyan Shilling (KES)</option>
+                <option value="USD">US Dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="GBP">British Pound (GBP)</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="tax_rate">Tax Rate (%)</label>
+              <input type="number" id="tax_rate" name="tax_rate" value="16" min="0" max="100">
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-secondary">Cancel</button>
+            <button type="submit" class="btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Delivery Settings -->
+      <div class="settings-section">
+        <div class="settings-header">
+          <i class="fas fa-truck" style="background-color: rgba(255, 153, 0, 0.1); color: #ff9900;"></i>
+          <h2>Delivery Settings</h2>
+        </div>
+        
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="delivery_fee">Base Delivery Fee (KES)</label>
+              <input type="number" id="delivery_fee" name="delivery_fee" value="100" min="0">
+            </div>
+            
+            <div class="form-group">
+              <label for="free_delivery_threshold">Free Delivery Threshold (KES)</label>
+              <input type="number" id="free_delivery_threshold" name="free_delivery_threshold" value="2000" min="0">
+            </div>
+          </div>
+          
+          <div class="toggle-container">
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Enable Same-Day Delivery</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="delivery_areas">Delivery Areas</label>
+            <textarea id="delivery_areas" name="delivery_areas" rows="3">Nairobi CBD, Westlands, Kilimani, Lavington, Karen, Kileleshwa, Parklands, Gigiri, Runda, Muthaiga, Kitisuru</textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-secondary">Cancel</button>
+            <button type="submit" class="btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Email Settings -->
+      <div class="settings-section">
+        <div class="settings-header">
+          <i class="fas fa-envelope" style="background-color: rgba(111, 66, 193, 0.1); color: #6f42c1;"></i>
+          <h2>Email Settings</h2>
+        </div>
+        
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="smtp_host">SMTP Host</label>
+              <input type="text" id="smtp_host" name="smtp_host" value="smtp.gmail.com">
+            </div>
+            
+            <div class="form-group">
+              <label for="smtp_port">SMTP Port</label>
+              <input type="number" id="smtp_port" name="smtp_port" value="587">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="smtp_username">SMTP Username</label>
+              <input type="email" id="smtp_username" name="smtp_username" value="notifications@efresh.co.ke">
+            </div>
+            
+            <div class="form-group">
+              <label for="smtp_password">SMTP Password</label>
+              <input type="password" id="smtp_password" name="smtp_password" value="********">
+            </div>
+          </div>
+          
+          <div class="toggle-container">
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Send Order Confirmation Emails</span>
+          </div>
+          
+          <div class="toggle-container">
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Send Order Status Update Emails</span>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-secondary">Cancel</button>
+            <button type="submit" class="btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs - Auth only -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.appspot.com",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  </script>
+  <script src="js/simple-role-guard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set admin name from localStorage
+      const adminEmail = localStorage.getItem('userEmail') || 'Admin';
+      document.getElementById('admin-name').textContent = adminEmail;
+      
+      // Logout functionality
+      document.getElementById('logout-btn').addEventListener('click', function() {
+        // Sign out from Firebase Auth
+        firebase.auth().signOut().then(() => {
+          // Clear login state
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('userRole');
+          localStorage.removeItem('userEmail');
+          localStorage.removeItem('userId');
+          
+          // Redirect to home page
+          window.location.href = 'index.html';
+        }).catch((error) => {
+          console.error('Error signing out:', error);
+        });
+      });
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/universal-translate.js"></script>
+</body>
+</html>

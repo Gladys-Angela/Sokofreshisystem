@@ -1,0 +1,109 @@
+/* Record Sales CSS */
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 12px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.item-row:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.item-quantity {
+  display: block;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.item-total {
+  font-weight: 600;
+  color: #00b761;
+  margin: 0 15px;
+}
+
+.remove-item-btn {
+  background: #ff5252;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-item-btn:hover {
+  background: #ff1a1a;
+  transform: scale(1.1);
+}
+
+#sale-total {
+  background: #f1f9f5;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: right;
+  color: #00b761;
+  border: 1px solid rgba(0, 183, 97, 0.2);
+}
+
+/* Improved form styling */
+.form-group select,
+.form-group input {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  border-color: #00b761;
+  box-shadow: 0 0 0 3px rgba(0, 183, 97, 0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.item-row {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Responsive improvements */
+@media (max-width: 576px) {
+  .item-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .item-total {
+    margin: 10px 0;
+  }
+  
+  .remove-item-btn {
+    align-self: flex-end;
+    margin-top: -40px;
+  }
+}

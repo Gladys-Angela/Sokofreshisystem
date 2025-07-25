@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    input {
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .result {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Firebase Authentication and Firestore Test</h1>
+    
+    <div class="card">
+      <h2>Firebase Initialization</h2>
+      <button id="test-init">Test Firebase Initialization</button>
+      <div id="init-result" class="result"></div>
+    </div>
+    
+    <div class="card">
+      <h2>Authentication Test</h2>
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+      <button id="test-register">Register</button>
+      <button id="test-login">Login</button>
+      <button id="test-logout">Logout</button>
+      <div id="auth-result" class="result"></div>
+    </div>
+    
+    <div class="card">
+      <h2>Firestore Test</h2>
+      <button id="test-write">Test Write</button>
+      <button id="test-read">Test Read</button>
+      <div id="firestore-result" class="result"></div>
+    </div>
+    
+    <div class="card">
+      <h2>Current User</h2>
+      <button id="get-current-user">Get Current User</button>
+      <div id="user-result" class="result"></div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs - Using a stable version -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.appspot.com",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    let firebaseInitialized = false;
+    let auth;
+    let db;
+
+    document.getElementById('test-init').addEventListener('click', function() {
+      const resultDiv = document.getElementById('init-result');
+      
+      try {
+        if (!firebaseInitialized) {
+          resultDiv.textContent = "Initializing Firebase...";
+          
+          if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+          }
+          
+          auth = firebase.auth();
+          db = firebase.firestore();
+          
+          firebaseInitialized = true;
+          resultDiv.textContent = "Firebase initialized successfully!";
+          resultDiv.className = "result success";
+          
+          // Log available Firebase services
+          resultDiv.textContent += "\n\nAvailable services:";
+          resultDiv.textContent += "\n- firebase.auth: " + (typeof firebase.auth === 'function');
+          resultDiv.textContent += "\n- firebase.firestore: " + (typeof firebase.firestore === 'function');
+        } else {
+          resultDiv.textContent = "Firebase already initialized!";
+          resultDiv.className = "result success";
+        }
+      } catch (error) {
+        resultDiv.textContent = "Error initializing Firebase: " + error.message;
+        resultDiv.className = "result error";
+        console.error("Firebase init error:", error);
+      }
+    });
+
+    document.getElementById('test-register').addEventListener('click', function() {
+      if (!firebaseInitialized) {
+        document.getElementById('auth-result').textContent = "Please initialize Firebase first";
+        document.getElementById('auth-result').className = "result error";
+        return;
+      }
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const resultDiv = document.getElementById('auth-result');
+      
+      if (!email || !password) {
+        resultDiv.textContent = "Please enter email and password";
+        resultDiv.className = "result error";
+        return;
+      }
+      
+      resultDiv.textContent = "Registering...";
+      
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          resultDiv.textContent = "Registration successful! User ID: " + user.uid;
+          resultDiv.className = "result success";
+          
+          // Store user role in Firestore
+          return db.collection('users').doc(user.uid).set({
+            email: email,
+            role: 'customer',
+            createdAt: new Date()
+          });
+        })
+        .then(() => {
+          resultDiv.textContent += "\nUser role stored in Firestore!";
+        })
+        .catch((error) => {
+          resultDiv.textContent = "Registration error: " + error.message;
+          resultDiv.className = "result error";
+          console.error("Registration error:", error);
+        });
+    });
+
+    document.getElementById('test-login').addEventListener('click', function() {
+      if (!firebaseInitialized) {
+        document.getElementById('auth-result').textContent = "Please initialize Firebase first";
+        document.getElementById('auth-result').className = "result error";
+        return;
+      }
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const resultDiv = document.getElementById('auth-result');
+      
+      if (!email || !password) {
+        resultDiv.textContent = "Please enter email and password";
+        resultDiv.className = "result error";
+        return;
+      }
+      
+      resultDiv.textContent = "Logging in...";
+      
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          resultDiv.textContent = "Login successful! User ID: " + user.uid;
+          resultDiv.className = "result success";
+          
+          // Check user role in Firestore
+          return db.collection('users').doc(user.uid).get();
+        })
+        .then((doc) => {
+          if (doc.exists) {
+            const userData = doc.data();
+            resultDiv.textContent += "\nUser role: " + userData.role;
+          } else {
+            resultDiv.textContent += "\nNo user data found in Firestore";
+          }
+        })
+        .catch((error) => {
+          resultDiv.textContent = "Login error: " + error.message;
+          resultDiv.className = "result error";
+          console.error("Login error:", error);
+        });
+    });
+
+    document.getElementById('test-logout').addEventListener('click', function() {
+      if (!firebaseInitialized) {
+        document.getElementById('auth-result').textContent = "Please initialize Firebase first";
+        document.getElementById('auth-result').className = "result error";
+        return;
+      }
+      
+      const resultDiv = document.getElementById('auth-result');
+      resultDiv.textContent = "Logging out...";
+      
+      auth.signOut()
+        .then(() => {
+          resultDiv.textContent = "Logout successful!";
+          resultDiv.className = "result success";
+        })
+        .catch((error) => {
+          resultDiv.textContent = "Logout error: " + error.message;
+          resultDiv.className = "result error";
+          console.error("Logout error:", error);
+        });
+    });
+
+    document.getElementById('test-write').addEventListener('click', function() {
+      if (!firebaseInitialized) {
+        document.getElementById('firestore-result').textContent = "Please initialize Firebase first";
+        document.getElementById('firestore-result').className = "result error";
+        return;
+      }
+      
+      const resultDiv = document.getElementById('firestore-result');
+      resultDiv.textContent = "Writing to Firestore...";
+      
+      const testData = {
+        message: "Test data",
+        timestamp: new Date()
+      };
+      
+      db.collection('test').doc('test-doc').set(testData)
+        .then(() => {
+          resultDiv.textContent = "Write successful!";
+          resultDiv.className = "result success";
+        })
+        .catch((error) => {
+          resultDiv.textContent = "Write error: " + error.message;
+          resultDiv.className = "result error";
+          console.error("Firestore write error:", error);
+        });
+    });
+
+    document.getElementById('test-read').addEventListener('click', function() {
+      if (!firebaseInitialized) {
+        document.getElementById('firestore-result').textContent = "Please initialize Firebase first";
+        document.getElementById('firestore-result').className = "result error";
+        return;
+      }
+      
+      const resultDiv = document.getElementById('firestore-result');
+      resultDiv.textContent = "Reading from Firestore...";
+      
+      db.collection('test').doc('test-doc').get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            resultDiv.textContent = "Read successful!\n" + JSON.stringify(data, null, 2);
+            resultDiv.className = "result success";
+          } else {
+            resultDiv.textContent = "No document found!";
+            resultDiv.className = "result error";
+          }
+        })
+        .catch((error) => {
+          resultDiv.textContent = "Read error: " + error.message;
+          resultDiv.className = "result error";
+          console.error("Firestore read error:", error);
+        });
+    });
+
+    document.getElementById('get-current-user').addEventListener('click', function() {
+      if (!firebaseInitialized) {
+        document.getElementById('user-result').textContent = "Please initialize Firebase first";
+        document.getElementById('user-result').className = "result error";
+        return;
+      }
+      
+      const resultDiv = document.getElementById('user-result');
+      const user = auth.currentUser;
+      
+      if (user) {
+        resultDiv.textContent = "Current user: " + user.email + " (ID: " + user.uid + ")";
+        
+        // Get user role from Firestore
+        db.collection('users').doc(user.uid).get()
+          .then((doc) => {
+            if (doc.exists) {
+              const userData = doc.data();
+              resultDiv.textContent += "\nUser role: " + userData.role;
+              resultDiv.className = "result success";
+            } else {
+              resultDiv.textContent += "\nNo user data found in Firestore";
+              resultDiv.className = "result error";
+            }
+          })
+          .catch((error) => {
+            resultDiv.textContent += "\nError getting user data: " + error.message;
+            resultDiv.className = "result error";
+          });
+      } else {
+        resultDiv.textContent = "No user is currently signed in";
+        resultDiv.className = "result error";
+      }
+    });
+  </script>
+</body>
+</html>

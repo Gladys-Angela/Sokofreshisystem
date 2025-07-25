@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Product | Vendor Portal - Soko freshi Groceries</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/vendor-products.css" />
+  <link rel="stylesheet" type="text/css" href="css/vendor-footer.css" />
+  <link rel="stylesheet" type="text/css" href="css/vendor-nav.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/edit-product-enhanced.css" />
+</head>
+
+<body>
+  <nav class="navigation">
+    <a href="vendor_home.html" class="logo">
+      Soko freshi <small>Vendor</small>
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="vendor_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="manage_products.html" class="active"><i class="fas fa-box"></i> Products</a></li>
+      <li><a href="record_sales.html"><i class="fas fa-cash-register"></i> Record Sales</a></li>
+      <li><a href="sales_history.html"><i class="fas fa-history"></i> Sales History</a></li>
+      <li><a href="help_center.html"><i class="fas fa-question-circle"></i> Help</a></li>
+    </ul>
+    <div class="right-nav">
+      <a href="edit_profile.html" class="profile">
+        <i class="fas fa-user-circle"></i>
+        <span>Profile</span>
+      </a>
+      <a href="#" id="logout-btn" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="vendor-container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="header-content">
+        <div class="header-text">
+          <h1>Edit Product</h1>
+          <p>Update your product information</p>
+        </div>
+        <div class="header-actions">
+          <a href="manage_products.html" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Back to Products
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <ul>
+        <li><a href="vendor_dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><i class="fas fa-angle-right"></i></li>
+        <li><a href="manage_products.html">Manage Products</a></li>
+        <li><i class="fas fa-angle-right"></i></li>
+        <li>Edit Product</li>
+      </ul>
+    </div>
+
+    <!-- Product Preview -->
+    <div class="product-preview" id="product-preview">
+      <img src="images/default-product.png" alt="Product" id="preview-image">
+      <div class="product-preview-info">
+        <h3 id="preview-name">Product Name</h3>
+        <p id="preview-category">Category</p>
+        <p id="preview-price">Ksh 0</p>
+      </div>
+    </div>
+
+    <!-- Edit Form -->
+    <div class="form-container">
+      <form id="edit-product-form">
+        <div class="form-group">
+          <label for="product-name">Product Name</label>
+          <input type="text" id="product-name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-category">Category</label>
+          <select id="product-category" name="category" required>
+            <option value="">Select Category</option>
+            <option value="Fruits">Fruits</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Fish & Meat">Fish & Meat</option>
+            <option value="Spices">Spices</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Bakery">Bakery</option>
+            <option value="Beverages">Beverages</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-price">Price (Ksh)</label>
+          <input type="number" id="product-price" name="price" min="0" step="1" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-stock">Stock Quantity</label>
+          <input type="number" id="product-stock" name="stock" min="0" step="1" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-description">Description</label>
+          <textarea id="product-description" name="description"></textarea>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="window.location.href='manage_products.html'">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <a href="vendor_home.html">Soko freshi</a>
+          <p>Your trusted platform for fresh groceries and quality products.</p>
+        </div>
+        
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="vendor_dashboard.html">Dashboard</a></li>
+            <li><a href="manage_products.html">Manage Products</a></li>
+            <li><a href="add_product.html">Add Product</a></li>
+            <li><a href="sales_history.html">Sales History</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="help_center.html">Help Center</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Soko freshi Groceries. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-storage-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/edit-product.js"></script>
+</body>
+</html>

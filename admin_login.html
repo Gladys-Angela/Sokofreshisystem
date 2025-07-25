@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Soko freshi Groceries</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-info">
+        <a href="index.html" class="logo" style="color: white; font-size: 2.5rem; margin-bottom: 20px;">
+            Soko freshi
+        </a>
+      <h2>Admin Access</h2>
+      <p>Please enter your administrator credentials to access the dashboard.</p>
+    </div>
+    <div class="login-form">
+      <h2>Admin Login</h2>
+      <p>Enter your credentials to continue.</p>
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="admin@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+      <div class="login-links">
+        <p>Not an admin? <a href="login.html">Return to main login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/translate.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/role-redirect.js"></script>
+
+  <script>
+    document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      if (!email || !password) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      // Show loading state
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Logging in...';
+      submitBtn.disabled = true;
+      
+      try {
+        // Use Firebase compat SDK directly
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        
+        // Get user role from Firestore
+        const userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+        let userRole = 'customer'; // default role
+        
+        if (userDoc.exists) {
+          const userData = userDoc.data();
+          userRole = userData.role || 'customer';
+        }
+        
+        // Verify admin role
+        if (userRole !== 'admin') {
+          alert('Access denied. Admin credentials required.');
+          // Sign out non-admin user
+          await firebase.auth().signOut();
+          return;
+        }
+        
+        // Store role and redirect
+        sessionStorage.setItem('userRole', userRole);
+        localStorage.setItem('userRole', userRole);
+        window.location.href = 'admin.html';
+        
+      } catch (error) {
+        console.error('Admin login error:', error);
+        alert('Login failed: ' + error.message);
+      } finally {
+        // Restore button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

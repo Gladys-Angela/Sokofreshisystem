@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Cart</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,
+    600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navigation">
+    <a href="index.html" class="logo">
+      Soko freshi
+    </a>
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+    <ul class="menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="my_orders.html">My Orders</a></li>
+      <li><a href="customer_dashboard.html">Dashboard</a></li>
+    </ul>
+    <div class="right-nav">
+      <a href="#" class="like">
+        <i class="far fa-heart"></i>
+        <span>0</span>
+      </a>
+      <a href="cart.html" class="cart">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <section id="popular-product">
+    <div class="product-heading">
+      <h3>Shopping Cart</h3>
+      <span></span>
+    </div>
+    <div class="product-container">
+        <div class="cart-items"></div>
+        <div class="cart-total"></div>
+        <div class="cart-actions">
+          <a href="checkout.html" class="btn checkout-btn">Proceed to Checkout</a>
+          <button id="save-order-btn" class="btn" style="background-color: #28a745; margin-left: 10px;">Save as Order</button>
+        </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+       <div class="footer-logo">
+         <a href="#">Soko freshi</a>
+         <div class="footer-social">
+           <a href="#">
+             <i class="fa-brands fa-facebook" style="color: #3a87fe;"></i>
+             <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
+             <i class="fa-brands fa-twitter" style="color: #11d6cc;"></i>
+             <i class="fa-brands fa-youtube" style="color: #ff0800;"></i>
+           </a>
+         </div>
+       </div>
+       <div class="footer-links">
+         <strong>Product</strong>
+         <ul>
+           <li>
+             <a href="#">Clothes</a>
+           </li>
+           <li>
+             <a href="#">Packages</a>
+           </li>
+           <li>
+             <a href="#">Popular</a>
+           </li>
+           <li>
+             <a href="#">New</a>
+           </li>
+         </ul>
+       </div>
+       <div class="footer-links">
+         <strong>Category</strong>
+         <ul>
+           <li>
+             <a href="#">Beauty</a>
+           </li>
+           <li>
+             <a href="#">Meats</a>
+           </li>
+           <li>
+             <a href="#">Kids</a>
+           </li>
+           <li>
+             <a href="#">Clothes</a>
+           </li>
+         </ul>
+       </div>
+       <div class="footer-links">
+         <strong>Contact</strong>
+         <ul>
+           <li>
+             <a href="#">Phone: ++254 758 599393</a>
+           </li>
+           <li>
+             <a href="#">Email: angie@gmail.com</a>
+           </li>
+         </ul>
+       </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="js/cart-data.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.firebasestorage.app",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartTotalContainer = document.querySelector('.cart-total');
+    const cartCountElement = document.getElementById('cart-count');
+    const saveOrderBtn = document.getElementById('save-order-btn');
+    
+    let cartItems = [];
+    let cartTotal = 0;
+
+    // Function to update cart count
+    function updateCartCount() {
+      const user = auth.currentUser;
+      if (user) {
+        // Try to get count from Firestore
+        db.collection('cart').where('userId', '==', user.uid).get()
+          .then(snapshot => {
+            cartCountElement.textContent = snapshot.size;
+          })
+          .catch(() => {
+            // Fallback to localStorage if Firestore fails
+            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const userCartItems = cartItems.filter(item => item.userId === user.uid);
+            cartCountElement.textContent = userCartItems.length;
+          });
+      }
+    }
+    
+    // Function to save cart as order
+    function saveCartAsOrder() {
+      const user = auth.currentUser;
+      if (user && cartItems.length > 0) {
+        // Create a new order in Firestore
+        db.collection('orders').add({
+          userId: user.uid,
+          items: cartItems.map(item => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            productName: item.productName || '',
+            productPrice: item.productPrice || 0
+          })),
+          total: cartTotal,
+          status: 'Draft',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+          alert('Cart saved as order! You can view it in My Orders.');
+          window.location.href = 'my_orders.html';
+        }).catch(error => {
+          alert('Error saving order: ' + error.message);
+        });
+      } else if (cartItems.length === 0) {
+        alert('Your cart is empty.');
+      }
+    }
+
+    // Check if user is logged in
+    auth.onAuthStateChanged(async user => {
+      if (user) {
+        const userRole = localStorage.getItem('userRole');
+        if (userRole === 'vendor') {
+          alert('You are not authorized to view this page.');
+          window.location.href = 'vendor_dashboard.html';
+          return;
+        }
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Fetch cart items using the shared function
+        try {
+          const cartData = await getCartItems(user);
+          cartItems = cartData.items;
+          cartTotal = cartData.total;
+          
+          if (cartItems.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Your cart is empty. <a href="products.html">Continue shopping</a></p>';
+            saveOrderBtn.style.display = 'none';
+            document.querySelector('.checkout-btn').style.display = 'none';
+          } else {
+            cartItemsContainer.innerHTML = '';
+            
+            // Display cart items
+            cartItems.forEach(item => {
+              const cartItemHtml = `
+                <div class="cart-item">
+                  <img src="${item.productImage}" alt="${item.productName}">
+                  <div class="item-details">
+                    <strong>${item.productName}</strong>
+                    <span class="quantity">Quantity: ${item.quantity}</span>
+                    <span class="price">Ksh${item.itemTotal}</span>
+                  </div>
+                  <button class="remove-btn" data-item-id="${item.id}" data-item-type="${item.id.startsWith('local-') ? 'local' : 'firebase'}">Remove</button>
+                </div>
+              `;
+              cartItemsContainer.innerHTML += cartItemHtml;
+            });
+            
+            cartTotalContainer.innerHTML = `<strong>Total: Ksh${cartTotal.toFixed(2)}</strong>`;
+            saveOrderBtn.style.display = 'inline-block';
+            document.querySelector('.checkout-btn').style.display = 'inline-block';
+          }
+        } catch (err) {
+          console.error('Error loading cart:', err);
+          cartItemsContainer.innerHTML = '<p>There was an error loading your cart. Please try again later.</p>';
+          saveOrderBtn.style.display = 'none';
+          document.querySelector('.checkout-btn').style.display = 'none';
+        }
+      } else {
+        // If not logged in, redirect to login page
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Remove from cart functionality
+    cartItemsContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('remove-btn')) {
+        e.preventDefault();
+        const itemId = e.target.dataset.itemId;
+        const itemType = e.target.dataset.itemType;
+        const user = auth.currentUser;
+        
+        if (!user) return;
+        
+        if (itemType === 'firebase') {
+          // Remove from Firestore
+          db.collection('cart').doc(itemId).delete().then(() => {
+            alert('Product removed from cart!');
+            updateCartCount();
+            location.reload();
+          }).catch(error => {
+            alert('Error removing product: ' + error.message);
+          });
+        } else {
+          // Remove from localStorage
+          const localCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+          
+          // Find the item in cartItems array to get its productId
+          const itemToRemove = cartItems.find(item => item.id === itemId);
+          
+          if (itemToRemove) {
+            const updatedItems = localCartItems.filter(item => 
+              !(item.userId === user.uid && item.productId === itemToRemove.productId));
+            localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+            alert('Product removed from cart!');
+            updateCartCount();
+            location.reload();
+          }
+        }
+      }
+    });
+    
+    // Save order button functionality
+    saveOrderBtn.addEventListener('click', () => {
+      saveCartAsOrder();
+    });
+  </script>
+</body>
+</html>

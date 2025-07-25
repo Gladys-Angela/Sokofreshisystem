@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soko freshi Store - Add Sample Products</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+</head>
+<body>
+  <div style="text-align: center; padding: 50px;">
+    <h1>Adding Sample Products</h1>
+    <p>This page will add sample products to your vendor account.</p>
+    <p>Please wait...</p>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/add-sample-products.js"></script>
+  <script>
+    // Redirect to manage products page after 5 seconds
+    setTimeout(() => {
+      window.location.href = 'manage_products.html';
+    }, 5000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register Customer - Soko freshi Groceries</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/modern-registration.css" />
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/chatbot.css" />
+</head>
+<body>
+  <div class="language-selector">
+    <select id="language-selector">
+      <option value="en" data-translate="english">English</option>
+      <option value="sw" data-translate="swahili">Swahili</option>
+    </select>
+  </div>
+
+  <div class="registration-container">
+    <div class="registration-info">
+      <a href="index.html" class="logo" style="color: white; font-size: 2.5rem; margin-bottom: 20px;">
+        Soko freshi
+      </a>
+      <h2 data-translate="join_efresh">Join Soko freshi Today</h2>
+      <p data-translate="customer_benefits">Create your customer account to enjoy fresh groceries delivered to your doorstep, track your orders, and save your favorite products.</p>
+      
+      <div class="features">
+        <div class="feature-item">
+          <i class="fas fa-truck-fast"></i>
+          <span data-translate="fast_delivery">Fast delivery to your doorstep</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-seedling"></i>
+          <span data-translate="fresh_products">Fresh products from local vendors</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-heart"></i>
+          <span data-translate="save_favorites">Save your favorite products</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="registration-form">
+      <h2 data-translate="customer_registration">Customer Registration</h2>
+      <p data-translate="fill_details">Please fill in your details to create an account</p>
+      <script src="js/translations.js"></script>
+      
+      <form id="register-form">
+        <div class="form-group">
+          <label for="full_name" data-translate="full_name">Full Name</label>
+          <input type="text" id="full_name" name="full_name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email" data-translate="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone" data-translate="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password" data-translate="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="form-group">
+          <label for="confirm_password" data-translate="confirm_password">Confirm Password</label>
+          <input type="password" id="confirm_password" name="confirm_password" required />
+        </div>
+
+        <button type="submit" class="btn-primary" data-translate="register_as_customer">Register as Customer</button>
+      </form>
+      
+      <div class="registration-links">
+        <p><span data-translate="already_registered">Already registered?</span> <a href="login.html" data-translate="login_here">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auto-translate.js"></script>
+  <script src="js/efresh-chatbot.js"></script>
+  <!-- Firebase SDKs - Auth only -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4H9MQ76i1p3tThi6Zoc-AGbfnqjBSLRI",
+      authDomain: "efresh-56b75.firebaseapp.com",
+      projectId: "efresh-56b75",
+      storageBucket: "efresh-56b75.appspot.com",
+      messagingSenderId: "253998754664",
+      appId: "1:253998754664:web:889840cf5d84ef903a84dd"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  </script>
+  <script src="js/role-check-register.js"></script>
+  <script src="js/register-tracker.js"></script>
+</body>
+</html>

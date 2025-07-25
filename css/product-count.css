@@ -1,0 +1,50 @@
+/* Product Count Styling */
+.product-count-section {
+  margin-bottom: 20px;
+}
+
+.product-count-loader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  width: fit-content;
+}
+
+.product-count-loader i {
+  color: #00b761;
+  font-size: 16px;
+  animation: spin 1s linear infinite;
+}
+
+.product-count-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  width: fit-content;
+}
+
+.product-count-display i {
+  color: #00b761;
+  font-size: 16px;
+}
+
+.product-count {
+  color: #1e293b;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
